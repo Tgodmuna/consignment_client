@@ -1,10 +1,18 @@
+import { useState } from "react";
+import NavBar from "./NavBar";
 import { FaBars, FaTimes } from "react-icons/fa";
 export const Header = () => {
+  const [NavBar_visibility, setNavBar_visibility] = useState(false);
+
+  const handleVisibility = () => {
+    setNavBar_visibility((prev) => !prev);
+  };
+
   return (
     <header
-      className={` bg-black text-cyan-600 max-w-[100vw] py-[1.5rem] px-2 h-[5rem] flex justify-between `}>
+      className={` bg-black max-w-[100vw] py-[1.5rem] px-2 h-[5rem] flex justify-between `}>
       {/* logo */}
-      <a href='kbjbs' title='go to home page' className='logo'>
+      <a href='kbjbs' title='go to home page' className='logo animate-pulse'>
         <img
           src='/Assets/images/logo.png'
           alt='logo'
@@ -15,14 +23,21 @@ export const Header = () => {
       {/* navbar activator */}
       <div className=' md:hidden border bordeer-cyan-700 w-fit p-1 '>
         <FaBars
+          onClick={() => handleVisibility()}
           size={30}
-          className='text-white hover:text-cyan-600 hover:cursor-pointer'
+          className={`${
+            NavBar_visibility ? "hidden" : "block"
+          }hover:text-white  hover:cursor-pointer text-cyan-600`}
         />
         <FaTimes
-          className='hidden hover:text-cyan-600 hover:cursor-pointer'
+          className={`${
+            NavBar_visibility ? "block" : "hidden"
+          } hover:text-cyan-600 hover:cursor-pointer`}
           size={30}
+          onClick={() => handleVisibility()}
         />
       </div>
+      <NavBar Navbar_Visibilty={NavBar_visibility} />
     </header>
   );
 };
