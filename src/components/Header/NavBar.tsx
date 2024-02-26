@@ -35,7 +35,7 @@ const NavBar = (prop: { Navbar_Visibilty: boolean }) => {
     return (
       <li
         key={index}
-        className='text-cyan-400 uppercase font-extralight flex gap-2 items-center hover:bg-black hover:bg-opacity-60 p-2 my-4 rounded-xl'>
+        className='text-cyan-400 uppercase font-extralight flex gap-2 items-center hover:bg-slate-300 p-2 my-4 rounded-xl'>
         {icon()}
         {item}
       </li>
@@ -46,7 +46,7 @@ const NavBar = (prop: { Navbar_Visibilty: boolean }) => {
     <nav
       className={`w-[55%] ${
         prop.Navbar_Visibilty ? "block " : " hidden"
-      } h-[100%] bg-black bg-opacity-95 absolute left-[45vw] transition-all  duration-300 top-[5rem] p-3 flex flex-col`}>
+      } h-[100%] bg-black bg-opacity-95  fixed z-50 left-[45vw] top-[-1rem] transition-all  duration-300 top-[5rem] p-3 flex flex-col`}>
       {links}
     </nav>
   );
