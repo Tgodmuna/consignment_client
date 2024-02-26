@@ -1,6 +1,8 @@
 import Typewriter from "../utilities/Typewriter";
+import Shipment from "./Shipment";
 
 const HeroBanner = () => {
+  //typeWriter handler
   const WritesUp = (): JSX.Element => {
     return (
       <>
@@ -35,6 +37,7 @@ logistics '
         <li>cross border</li>
         <li>supply-chain</li>
       </ul>
+      <Shipment />
     </section>
   );
 };
