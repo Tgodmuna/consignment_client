@@ -10,7 +10,7 @@ export const Header = () => {
 
   return (
     <header
-      className={` bg-black max-w-[100vw] py-[1.5rem] px-2 h-[5rem] flex justify-between `}>
+      className={`Header bg-black max-w-[100vw] top-[-1rem] fixed z-20 py-[1.5rem] px-2 h-[5rem] flex justify-between `}>
       {/* logo */}
       <a href='kbjbs' title='go to home page' className='logo animate-pulse'>
         <img

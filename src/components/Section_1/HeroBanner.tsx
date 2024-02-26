@@ -5,7 +5,7 @@ const HeroBanner = () => {
   //typeWriter handler
   const WritesUp = (): JSX.Element => {
     return (
-      <>
+      <div className="mt-[4rem]">
         <Typewriter
           className={
             " uppercase text-center underline text-2xl font-sans  font-bold transition-all duration-300 p-1  text-gray-300"
@@ -24,11 +24,11 @@ logistics '
           text='services provider'
           delay={400}
         />
-      </>
+      </div>
     );
   };
   return (
-    <section className={`banner `}>
+    <section className={`banner  pb-2`}>
       {WritesUp()}
       <ul className=' Service_type flex  flex-wrap text-neutral-500 mt-2 uppercase w-full'>
         <li>express parcel</li>

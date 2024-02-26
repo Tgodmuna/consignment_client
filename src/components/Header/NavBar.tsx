@@ -46,7 +46,7 @@ const NavBar = (prop: { Navbar_Visibilty: boolean }) => {
     <nav
       className={`w-[55%] ${
         prop.Navbar_Visibilty ? "block " : " hidden"
-      } h-[100%] bg-black bg-opacity-95  fixed z-50 left-[45vw] top-[-1rem] transition-all  duration-300 top-[5rem] p-3 flex flex-col`}>
+      } h-[100%] bg-black bg-opacity-95  fixed z-50 left-[45vw] top-[-1rem] transition-all  duration-300  p-3 flex flex-col`}>
       {links}
     </nav>
   );
