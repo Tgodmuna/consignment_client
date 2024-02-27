@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import Typewriter from "../utilities/Typewriter";
 
 const About = () => {
-  const [isVisible, setIsVisible] = useState(false);
   const aboutImageRefs = useRef<
     [HTMLImageElement | null, HTMLImageElement | null]
   >([null, null]);
@@ -92,9 +91,9 @@ const About = () => {
           const txtTop =
             scrollTextRefs.current[index]?.getBoundingClientRect().top;
           const isInView =
-            imgTop < windowHeight * 0.75 &&
+            imgTop < windowHeight * 0.50 &&
             txtTop &&
-            txtTop < windowHeight * 0.75;
+            txtTop < windowHeight * 0.50;
           if (isInView) {
             aboutImageRef.classList.add("animate");
             scrollTextRefs.current[index]?.classList.add("animate");
