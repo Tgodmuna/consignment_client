@@ -28,13 +28,6 @@ logistics '
     );
   };
 
-  // //intro slide
-  // const Slides = [{
-  //   name: 'slide1',
-  //   contents: {
-  //     text
-  //   }
-  // }]
   return (
     <section className={`banner  pb-2`}>
       <div className='slide1'>

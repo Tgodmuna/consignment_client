@@ -2,7 +2,6 @@ import { GrAppleAppStore } from "react-icons/gr";
 import { BiLogoPlayStore } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import { FcCancel } from "react-icons/fc";
-import { animate } from "framer-motion";
 
 const Shipment = () => {
   const [PhoneNum, setPhoneNum] = useState<string>("");
