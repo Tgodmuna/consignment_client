@@ -22,7 +22,7 @@ const About = () => {
     useEffect(() => {
       const timer = setTimeout(() => {
         setCurrentTextIndex((prevIndex) => (prevIndex + 1) % texts.length);
-      }, 4000); // Adjust the delay as needed
+      }, 3000); // Adjust the delay as needed
 
       return () => clearTimeout(timer);
     }, [currentTextIndex, texts]);
@@ -31,7 +31,7 @@ const About = () => {
       <Typewriter
         text={texts[currentTextIndex]}
         className=' fade-in animate-pulse text-3xl text-neutral-400 w-fit text-wrap capitalize m-2'
-        delay={100}
+        delay={50}
       />
     );
   };
