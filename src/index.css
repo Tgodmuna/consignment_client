@@ -1,3 +1,64 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.navbar-links {
+  @apply text-gray-300 text-[40px];
+}
+.banner {
+  background-image: url(../public/Assets//images/slide-2.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: 55%;
+}
+.Service_type {
+  list-style-type: square;
+  padding: 10px;
+}
+::marker {
+  color: red;
+  font-size: 2rem;
+}
+.Service_type li {
+  margin: 0px 1rem 0.5rem 22px;
+}
+
+.Header {
+  width: 100vw;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  .fade-in {
+    animation: fadeIn 4s ease-in-out;
+  }
+}
+
+.about_Image {
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.scroll_text {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+
