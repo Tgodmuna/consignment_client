@@ -6,7 +6,7 @@
   @apply text-gray-300 text-[40px];
 }
 .banner {
-  background-image: url(../public/Assets//images/slide-2.jpg);
+  background-image: url(../public/Assets//images/JFj.gif);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -60,5 +60,66 @@
   transform: translateX(0);
 }
 
+.Animate {
+  animation-name: slideFromBottom, fadeInFromTop;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes slideFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(130px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-120px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.Animate-out {
+  animation-name: fade-out;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+}
+
+.flashing-text {
+  animation: flash 2s infinite alternate; /* Change animation duration as needed */
+}
+
+@keyframes flash {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.3;
+  }
+}
+.label {
+  @apply w-fit peer-focus:transition-all duration-200 peer-focus:top-[-4rem] text-slate-300 relative top-[-2rem] left-[1rem];
+}
+.input {
+  @apply w-full border-gray-500 rounded-md px-4 py-2 border;
+}
 
 

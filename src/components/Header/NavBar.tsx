@@ -7,12 +7,14 @@ import {
 } from "react-icons/fa";
 import { FcAbout } from "react-icons/fc";
 import { MdWorkOutline } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 type proptype = {
   Navbar_Visibilty: boolean;
   setNavBar: () => void;
 };
 const NavBar = (prop: proptype) => {
+
   const links = [
     "home",
     "about",

@@ -29,7 +29,7 @@ logistics '
   };
 
   return (
-    <section className={`banner  pb-2`}>
+    <section id="section1"  className={`banner  pb-2`}>
       <div className='slide1'>
         {WritesUp()}
         <ul className=' Service_type flex  flex-wrap text-neutral-500 mt-2 uppercase w-full'>

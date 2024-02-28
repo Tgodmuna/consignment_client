@@ -70,7 +70,7 @@ const GoldMaterialsShipped: React.FC = () => {
   };
 
   return (
-    <div className='container mx-auto px-4 py-8'>
+    <div id="section5" className='container mx-auto px-4 py-8'>
       <h2 className='text-3xl font-semibold mb-4'>
         Multimillion Dollar Business Gold and Gold Materials Shipped
       </h2>{" "}

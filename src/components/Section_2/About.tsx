@@ -91,9 +91,9 @@ const About = () => {
           const txtTop =
             scrollTextRefs.current[index]?.getBoundingClientRect().top;
           const isInView =
-            imgTop < windowHeight * 0.50 &&
+            imgTop < windowHeight * 0.5 &&
             txtTop &&
-            txtTop < windowHeight * 0.50;
+            txtTop < windowHeight * 0.5;
           if (isInView) {
             aboutImageRef.classList.add("animate");
             scrollTextRefs.current[index]?.classList.add("animate");
@@ -110,7 +110,9 @@ const About = () => {
   }, []);
 
   return (
-    <section className='service max-w-[100vw] overflow-x-hidden h-auto pb-4 '>
+    <section
+      className='service max-w-[100vw] overflow-x-hidden h-auto pb-4 '
+      id='section2'>
       {TypeWriterText()}
       <ul className='p-2'>{reasonsCard}</ul>
 

@@ -139,7 +139,7 @@ const OurSevices = () => {
   });
 
   return (
-    <div className='bg-[rgb(16,18,24)] p-2 w-auto flex flex-col'>
+    <div className='bg-[rgb(16,18,24)] p-2 w-auto flex flex-col' id='section3'>
       <div className='flex flex-col'>
         <h1 className='capitalize w-[18rem] mx-1 font-semibold text-[18px] text-center text-slate-200'>
           Trust Gold Tools Set for every logistics
