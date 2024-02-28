@@ -1,8 +1,18 @@
-import { FaHome, FaMap, FaPeopleArrows, FaPhone } from "react-icons/fa";
+import {
+  FaHome,
+  FaMap,
+  FaPeopleArrows,
+  FaPhone,
+  FaTimes,
+} from "react-icons/fa";
 import { FcAbout } from "react-icons/fc";
 import { MdWorkOutline } from "react-icons/md";
 
-const NavBar = (prop: { Navbar_Visibilty: boolean }) => {
+type proptype = {
+  Navbar_Visibilty: boolean;
+  setNavBar: () => void;
+};
+const NavBar = (prop: proptype) => {
   const links = [
     "home",
     "about",
@@ -41,12 +51,16 @@ const NavBar = (prop: { Navbar_Visibilty: boolean }) => {
       </li>
     );
   });
+  console.log(prop.Navbar_Visibilty);
 
   return (
     <nav
-      className={`w-[55%] ${
-        prop.Navbar_Visibilty ? "block " : " hidden"
-      } h-[100%] bg-black bg-opacity-95  fixed z-50 left-[45vw] top-[-1rem] transition-all  duration-300  p-3 flex flex-col`}>
+      className={` mt-[1.5rem] w-[55%] opacity-100  h-[100%] bg-black bg-opacity-95  fixed z-50 left-[45vw] top-[-1rem] transition-all  duration-1000  p-3 flex flex-col`}>
+      <FaTimes
+        className={`hover:text-cyan-600 text-xl text-white self-end hover:cursor-pointer`}
+        size={30}
+        onClick={() => prop.setNavBar()}
+      />
       {links}
     </nav>
   );
