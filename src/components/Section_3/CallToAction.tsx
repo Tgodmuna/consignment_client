@@ -1,6 +1,7 @@
-import ShippingForm from "../Auth/Registration";
+import { useNavigate } from "react-router-dom";
 
 export const CallToAction = () => {
+  const navigate = useNavigate();
   return (
     <div
       id='section6'
@@ -14,7 +15,19 @@ export const CallToAction = () => {
           TrustGold
         </span>
       </p>
-      <ShippingForm />
+
+      <div className='flex  gap-2  '>
+        <button
+          onClick={() => navigate("jkjbjb")}
+          className='rounded-lg text-center p-2 capitalize text-black bg-white hover:text-white hover:bg-black '>
+          personal courier
+        </button>
+        <button
+          onClick={() => navigate("jkjbjb")}
+          className='rounded-lg text-center p-2 capitalize text-black bg-white hover:text-white hover:bg-black '>
+          Business shipment
+        </button>
+      </div>
     </div>
   );
 };
