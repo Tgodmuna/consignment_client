@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaAngleDown, FaArrowDown } from "react-icons/fa";
+import { FaAngleDown } from "react-icons/fa";
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<null | number>(null);

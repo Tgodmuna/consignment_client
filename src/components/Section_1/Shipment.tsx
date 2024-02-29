@@ -3,7 +3,6 @@ import { BiLogoPlayStore } from "react-icons/bi";
 import { ChangeEvent, useEffect, useState } from "react";
 import { FcCancel } from "react-icons/fc";
 import { FaBus, FaPlane } from "react-icons/fa";
-import { stringify } from "querystring";
 
 const Shipment = () => {
   const [PhoneNum, setPhoneNum] = useState<string>("");

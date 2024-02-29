@@ -13,6 +13,7 @@ const ShippingForm = () => {
     companyRegistrationNumber: "",
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [Response, setResponse] = useState("");
 
   const handleChange = (e) => {
