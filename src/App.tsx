@@ -22,9 +22,9 @@ function App() {
         <FAQ />
         <Footer />
       </div>
-      <Routes>
+      {/* <Routes>
         <Route path='/register'  element={<ShippingForm />} />
-      </Routes>
+      </Routes> */}
     </>
   );
 }
