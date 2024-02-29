@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FaAngleDown, FaArrowDown } from "react-icons/fa";
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<null | number>(null);
@@ -61,41 +62,33 @@ const FAQ = () => {
   };
 
   return (
-    <div className='max-w-md mx-auto gap-3' id='section7'>
-      <div className='mt-6 p-2'>
-        <div className='flex flex-col'>
-          <h1 className='text-xl font-extrabold text-center uppercase m-auto'>
+    <div className='max-w-md mx-auto gap-3 md:max-w-full' id='section7'>
+      <div className='mt-6 p-2 m-2 md:flex md:flex-col flex-wrap md:justify-between md:items-center'>
+        <div className='flex flex-col md:max-w-[50vw] md:items-start'>
+          <h1 className='text-xl font-extrabold text-neutral-800 italic text-center uppercase m-auto md:text-3xl '>
             Frequently asked questions
           </h1>
-          <div className='w-[18rem] bg-green-400 p-[3px] rounded-xl border border-white m-auto mt-1'></div>
+          <div className='w-full bg-green-400 p-[3px] rounded-xl border border-white m-auto mt-1 '></div>
         </div>
-        {faqs.map((faq, index) => (
-          <div key={index} className='border-b py-4 m-2'>
+
+        <div className='md:max-w-full m-auto md:flex md:overflow-y-hidden md:overflow-scroll'>
+          {faqs.map((faq, index) => (
             <div
-              className='flex justify-between items-center cursor-pointer p-[1rem] even:bg-slate-200 odd:bg-slate-100'
-              onClick={() => handleToggle(index)}>
-              <div className='text-lg font-semibold'>{faq.question}</div>
-              <svg
-                className={`w-6 h-6 transition-transform transform ${
-                  openIndex === index ? "rotate-180" : ""
-                }`}
-                fill='none'
-                stroke='currentColor'
-                viewBox='0 0 24 24'
-                xmlns='http://www.w3.org/2000/svg'>
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth='2'
-                  d={openIndex === index ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"}
-                />
-              </svg>
+              key={index}
+              className='border-b py-4 m-2 md:max-w-[30rem] h-fit '>
+              <div
+                className='flex justify-between items-center cursor-pointer p-[1rem] even:bg-slate-400 odd:bg-slate-100 md:w-[25rem] md:items-center  '
+                onClick={() => handleToggle(index)}>
+                <div className='text-sm md:text-lg font-semibold capitalize text-neutral-800 md:truncate md:hover:overflow-visible md:hover:text-wrap '>{faq.question}</div>
+                <FaAngleDown size={30} />
+              </div>
+
+              {openIndex === index && (
+                <div className='mt-2 text-gray-700'>{faq.answer}</div>
+              )}
             </div>
-            {openIndex === index && (
-              <div className='mt-2 text-gray-700'>{faq.answer}</div>
-            )}
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

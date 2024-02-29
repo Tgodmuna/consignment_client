@@ -100,7 +100,7 @@ const OurSevices = () => {
     <li
       key={index}
       ref={(element) => (ListRefs.current[index] = element)}
-      className='flex flex-col justify-between my-[2rem] p-2 items-start Animate'>
+      className='flex flex-col justify-between my-[2rem] p-2 items-start Animate md:max-w-[30%] '>
       <img src={item.icon} alt='user icon' className='w-[4rem] object-cover' />
       <div className='flex flex-col gap-y-4 p-2'>
         <h1 className='capitalize text-white font-bold'>{item.title}</h1>
@@ -122,13 +122,13 @@ const OurSevices = () => {
     return (
       <div
         key={index}
-        className='w-[20rem] bg-slate-200 rounded-md border p-4 mb-4'>
+        className='w-[20rem] bg-slate-200 rounded-md border p-4 mb-4 md:w-[30%] '>
         <img
           src={item.image}
           alt='Service Icon'
-          className='w-full object-contain  mx-auto mb-4'
+          className='w-full object-contain  mx-auto mb-4 md:w-auto'
         />
-        <h2 className='text-xl font-semibold text-center mb-2 uppercase'>
+        <h2 className='text-xs font-semibold text-center mb-2 uppercase md:text-[13px] md: underline'>
           {item.serviceName}
         </h2>
         <p className='text-xs text-gray-600 capitalize text-wrap'>
@@ -140,15 +140,19 @@ const OurSevices = () => {
 
   return (
     <div className='bg-[rgb(16,18,24)] p-2 w-auto flex flex-col' id='section3'>
-      <div className='flex flex-col'>
+      <div className='flex flex-col w-fit m-auto'>
         <h1 className='capitalize w-[18rem] mx-1 font-semibold text-[18px] text-center text-slate-200'>
           Trust Gold Tools Set for every logistics
         </h1>
         <div className='w-[18rem] bg-red-900 p-[3px] rounded-xl border border-white m-auto mt-1'></div>
       </div>
-      <ul>{ServiceToolset}</ul>
+      <ul className='flex flex-col flex-wrap md:flex-row md:justify-center items-center '>
+        {ServiceToolset}
+      </ul>
 
-      <div className='flex flex-wrap w-auto'>{serviceList}</div>
+      <div className='flex flex-wrap w-auto md:items-center md:justify-between md:p-2'>
+        {serviceList}
+      </div>
     </div>
   );
 };

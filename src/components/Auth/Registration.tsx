@@ -31,7 +31,7 @@ const ShippingForm = () => {
   };
 
   return (
-    <div className='max-w-md mx-auto bg-white p-2 rounded-xl shadow-md border border-lime-300 '>
+    <div className='max-w-md mx-auto bg-white p-2 rounded-xl shadow-md border border-lime-300 md:w-[50vw] '>
       <h2 className='text-3xl font-semibold mb-4 my'>Shipping Form</h2>
       <form
         className='w-full bg-neutral-900 rounded-lg py-4 pt-[3rem] px-2 border-[4px] border-cyan-500 '

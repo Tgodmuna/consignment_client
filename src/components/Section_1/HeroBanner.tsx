@@ -8,7 +8,7 @@ const HeroBanner = () => {
       <div className='mt-[4rem]'>
         <Typewriter
           className={
-            " uppercase text-center underline text-2xl font-sans  font-bold transition-all duration-300 p-1  text-gray-300"
+            " uppercase text-center underline text-2xl font-sans  font-bold transition-all duration-300 p-1  text-lime-300"
           }
           text='international logistics'
           delay={100}
@@ -29,10 +29,10 @@ logistics '
   };
 
   return (
-    <section id="section1"  className={`banner  pb-2`}>
+    <section id="section1"  className={`banner flex flex-col md:flex-row md:justify-between items-center pb-2`}>
       <div className='slide1'>
         {WritesUp()}
-        <ul className=' Service_type flex  flex-wrap text-neutral-500 mt-2 uppercase w-full'>
+        <ul className='Service_type flex justify-center items-center flex-wrap text-blue-200 mt-2 uppercase w-full'>
           <li>express parcel</li>
           <li>ptl</li>
           <li>ftl</li>

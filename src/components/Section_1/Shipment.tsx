@@ -75,9 +75,9 @@ const Shipment = () => {
   }, [phoneNumError, trackingOrderTypeError]);
 
   return (
-    <form className='bg-gray-200 m-6 pb-3  p-2 max-w-fit rounded-xl'>
+    <form className='bg-gray-200 m-6 pb-3  p-2 max-w-fit rounded-xl md:mt-[5rem] md:w-[80%] '>
       {/* order type */}
-      <div className='flex justify-between items-center border border-cyan-500 p-3 m-2'>
+      <div className='flex justify-between items-center border border-cyan-500 p-3 m-2 md:max-w-[100%] '>
         <button
           type='button'
           className=' SubmitBTN text-xs border hover:bg-green-400 hover:text-white hover:border-0 border-green-600 p-2 rounded-lg hover:cursor-pointer  uppercase font-bold font-sans'>

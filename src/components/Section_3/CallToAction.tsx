@@ -16,16 +16,12 @@ export const CallToAction = () => {
         </span>
       </p>
 
-      <div className='flex  gap-2  '>
+      <div className='flex   '>
         <button
-          onClick={() => navigate("jkjbjb")}
-          className='rounded-lg text-center p-2 capitalize text-black bg-white hover:text-white hover:bg-black '>
-          personal courier
-        </button>
-        <button
-          onClick={() => navigate("jkjbjb")}
-          className='rounded-lg text-center p-2 capitalize text-black bg-white hover:text-white hover:bg-black '>
-          Business shipment
+          type='button'
+          onClick={() => navigate("register")}
+          className='rounded-lg text-center p-2 capitalize text-black bg-white hover:text-white hover:bg-green-300 '>
+          start shipment
         </button>
       </div>
     </div>
