@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const ShippingForm = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +16,8 @@ const ShippingForm = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [Response, setResponse] = useState("");
 
+  useEffect(() => console.log(Response), [Response]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -24,20 +26,20 @@ const ShippingForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    fetch("mnknkjnjk", { method: "POST", body: JSON.stringify(formData) }).then(
-      (res) => {
-        res.json().then((res) => setResponse(res));
-      },
-    );
+    fetch("https://chikaconsignment1-1.onrender.com/register", {
+      method: "POST",
+      body: JSON.stringify(formData),
+    }).then((res) => {
+      res.json().then((res) =>{console.log(res);})
+    });
   };
 
   return (
-    <div className='max-w-md mx-auto bg-white p-2 rounded-xl shadow-md border border-lime-300 md:w-[50vw] '>
-      <h2 className='text-3xl font-semibold mb-4 my'>Shipping Form</h2>
+    <div className=' mx-auto pt-[6rem] rounded-xl shadow-md border md:max-w-[100%] flex flex-col items-center justify-center RegisterBg '>
       <form
-        className='w-full bg-neutral-900 rounded-lg py-4 pt-[3rem] px-2 border-[4px] border-cyan-500 '
+        className=' glass-container md:w-[50%] p-3  w-full rounded-lg flex flex-col items-center justify-center bg-slate-100 py-4 pt-[3rem] px-2 border-[1px] border-cyan-500 '
         onSubmit={handleSubmit}>
-        <div className='mb'>
+        <div className='mb-4 inputsContainer'>
           <input
             type='text'
             name='fullName'
@@ -50,7 +52,8 @@ const ShippingForm = () => {
             Full Name
           </label>
         </div>
-        <div className='mb-4'>
+
+        <div className='mb-4 inputsContainer'>
           <input
             type='email'
             name='email'
@@ -63,7 +66,8 @@ const ShippingForm = () => {
             Email
           </label>
         </div>
-        <div className='mb-4'>
+
+        <div className='mb-4 inputsContainer'>
           <input
             type='tel'
             name='phoneNumber'
@@ -76,21 +80,22 @@ const ShippingForm = () => {
             Phone Number
           </label>
         </div>
-        <div className='mb-4'>
-          <textarea
+
+        <div className='mb-4 inputsContainer'>
+          <input
             name='address'
             value={formData.address}
             onChange={handleChange}
             className='w-full border-gray-300 rounded-md px-4 py-2 border peer input'
-            rows={3}
-            required></textarea>
+            required
+          />
           <label className='label peer-focus:top-[-8rem]'>Address</label>
         </div>
 
         {/* business */}
         {formData.shipmentType === "business" && (
           <>
-            <div className='mb-4'>
+            <div className='mb-4 inputsContainer'>
               <input
                 type='text'
                 name='companyName'
@@ -104,19 +109,21 @@ const ShippingForm = () => {
                 Company Name
               </label>
             </div>
-            <div className='mb-4'>
-              <textarea
+
+            <div className='mb-4 inputsContainer'>
+              <input
                 name='companyAddress'
                 value={formData.companyAddress}
                 onChange={handleChange}
                 className=' input peer '
-                rows={3}
-                required></textarea>
+                required
+              />
               <label className='label peer-focus:top-[-8rem]'>
                 Company Address
               </label>
             </div>
-            <div className='mb-4'>
+
+            <div className='mb-4 inputsContainer'>
               <input
                 type='tel'
                 name='companyPhoneNumber'
@@ -132,7 +139,8 @@ const ShippingForm = () => {
                 Company Phone Number
               </label>
             </div>
-            <div className='mb-4'>
+
+            <div className='mb-4 inputsContainer'>
               <input
                 type='text'
                 name='companyRegistrationNumber'
@@ -150,17 +158,19 @@ const ShippingForm = () => {
             </div>
           </>
         )}
-        <div className='mb-4'>
-          <label className='block mb-1 font-bold text-xl'>Shipment Type</label>
+
+        <div className='mb-4 inputsContainer '>
+          <label className='block mb-1 font-bold text-sm md:text-sm text-neutral-400'>Shipment Type</label>
           <select
             name='shipmentType'
             value={formData.shipmentType}
             onChange={handleChange}
-            className='w-[10rem] border-gray-300 rounded-md px-4 py-2'>
+            className='w-[10rem] border-gray-300 rounded-md px-4 py-2 bg-transparent'>
             <option value='personal'>Personal</option>
             <option value='business'>Business</option>
           </select>
         </div>
+
         <div className='my-[1rem] pb-5'>
           <button
             type='submit'
