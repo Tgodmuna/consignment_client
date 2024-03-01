@@ -146,7 +146,7 @@ const Shipment = () => {
           }}
           type='button'
           className={` ${
-            !isTrackingFormType ? "bg-green-400" : ""
+            !isTrackingFormType ? "bg-black text-cyan-500 animate-pulse" : ""
           } SubmitBTN text-xs border hover:bg-slate-400 hover:text-white hover:border-0 border-green-600 p-2 rounded-lg hover:cursor-pointer  uppercase font-bold font-sans`}>
           track order
         </button>
@@ -157,7 +157,7 @@ const Shipment = () => {
           }}
           type='button'
           className={` ${
-            isTrackingFormType ? "bg-green-400" : ""
+            isTrackingFormType ? "bg-black text-cyan-500 animate-pulse" : ""
           } text-xs border hover:bg-slate-400 hover:text-white hover:border-0 border-green-600 p-2 rounded-lg hover:cursor-pointer  uppercase font-bold font-sans`}>
           ship order
         </button>
@@ -171,7 +171,7 @@ const Shipment = () => {
             track your order through
           </h1>
         ) : (
-          <h1 className=' text-center text-xl text-nowrap font-bold text-neutral-900 m-0 capitalize'>
+          <h1 className=' text-center text-xl text-nowrap font-bold text-cyan-500 m-0 capitalize'>
             ship personal courier{" "}
           </h1>
         )}
@@ -203,7 +203,9 @@ const Shipment = () => {
               }}
               type='button'
               className={` ${
-                IsLocalDestinations ? "bg-green-400" : ""
+                IsLocalDestinations
+                  ? "bg-black text-cyan-500 animate-pulse"
+                  : ""
               } SubmitBTN flex items-center gap-2 text-xs border hover:bg-slate-400 hover:text-white hover:border-0 border-green-600 p-2 rounded-lg hover:cursor-pointer  uppercase font-bold font-sans`}>
               local <FaBus color='red' />
             </button>
@@ -213,7 +215,9 @@ const Shipment = () => {
               }}
               type='button'
               className={` ${
-                !IsLocalDestinations ? "bg-green-400" : ""
+                !IsLocalDestinations
+                  ? "bg-black text-cyan-500 animate-pulse"
+                  : ""
               } text-xs border flex items-center gap-2 hover:bg-slate-400 hover:text-white hover:border-0 border-green-600 p-2 rounded-lg hover:cursor-pointer  uppercase font-bold font-sans`}>
               international <FaPlane color='red' />
             </button>
@@ -229,7 +233,7 @@ const Shipment = () => {
             {IsLocalDestinations && (
               <>
                 <input
-                  className='placeholder:uppercase border-[2px] border-slate-400  bg-transparent text-center text-gray-50 p-2 rounded-lg w-[100%]'
+                  className='placeholder:uppercase placeholder:text-cyan-500 border-[2px] border-cyan-500  bg-transparent text-center text-gray-50 p-2 rounded-lg w-[100%]'
                   placeholder='enter pick up pin code'
                   type='number'
                   name='localPinCode'
@@ -241,7 +245,7 @@ const Shipment = () => {
                 />
 
                 <input
-                  className='placeholder:uppercase border-[2px] border-slate-400  bg-transparent text-center text-gray-50 p-2 rounded-lg w-[100%]'
+                  className='placeholder:uppercase placeholder:text-cyan-500 border-[2px] border-cyan-500 mt-2  bg-transparent text-center text-gray-50 p-2 rounded-lg w-[100%]'
                   placeholder='enter delivery  pin code'
                   type='number'
                   name='D-pincode'
@@ -257,7 +261,7 @@ const Shipment = () => {
             {!IsLocalDestinations && (
               <>
                 <input
-                  className='placeholder:uppercase border-[2px] border-slate-400  bg-transparent text-center text-gray-50 p-2 rounded-lg w-[100%]'
+                  className='placeholder:uppercase placeholder:text-cyan-500 border-[2px] border-cyan-500  bg-transparent text-center text-gray-50 p-2 rounded-lg w-[100%]'
                   placeholder='enter pick up pin code'
                   type='number'
                   name='countryPickUpPinCode'
@@ -269,7 +273,7 @@ const Shipment = () => {
                 />
 
                 <input
-                  className='placeholder:uppercase border-[2px] border-slate-400  bg-transparent text-center text-gray-50 p-2 rounded-lg w-[100%]'
+                  className='placeholder:uppercase placeholder:text-cyan-500 border-[2px] border-cyan-500 mt-2  bg-transparent text-center text-gray-50 p-2 rounded-lg w-[100%]'
                   placeholder='enter delivery country name'
                   type='number'
                   name='countryDeliveryName'
