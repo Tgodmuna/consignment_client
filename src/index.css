@@ -6,7 +6,7 @@
   @apply text-gray-300 text-[40px];
 }
 .banner {
-  background-image: url(../public/Assets//images/JFj.gif);
+  background-image: url(../public/Assets/images/JFj.gif);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -116,13 +116,34 @@
   }
 }
 .label {
-  @apply w-fit peer-focus:transition-all duration-200 peer-focus:top-[-4rem] text-slate-300 relative top-[-2rem] left-[1rem];
+  @apply w-fit peer-focus:transition-all  duration-200 peer-focus:top-[-4rem] text-slate-300 text-xs relative top-[-2rem] left-[1rem];
 }
 .input {
-  @apply w-full border-gray-500 rounded-md px-4 py-2 border;
+  @apply w-full md:max-w-[70%] border-t-0 bg-transparent border-l-0 border-r-0 appearance-none  border-gray-500   border;
 }
 
-.word-space {
-  word-spacing: rem;
+.inputsContainer {
+  @apply w-full flex flex-col justify-center items-center;
 }
 
+.trackBg {
+  background-image: url(../public/Assets/images/delivery.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.RegisterBg {
+  background-image: url(../public/Assets/images/plane.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.glass-container {
+  background-color: rgba(255, 255, 255, 0);
+  backdrop-filter: blur(5px);
+}
+
+.icon {
+  @apply text-gray-400 text-[1.4rem]  group-hover:animate-spin;
+}

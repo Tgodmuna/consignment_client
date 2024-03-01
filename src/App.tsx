@@ -1,4 +1,3 @@
-// import { Route, Routes } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 import { Header } from "./components/Header/Header";
 import About from "./components/Section_2/About";
@@ -9,6 +8,8 @@ import Footer from "./components/Section_4/Footer";
 import Index from "./components/Index";
 import Tracking from "./components/Section_1/Tracking";
 import ShippingForm from "./components/Auth/Registration";
+
+import { DashBoard } from "./components/Dashboard/DashBoard";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path='/faq' element={<FAQ />} />
       </Routes>
       <Footer />
+      {/* <DashBoard /> */}
     </div>
   );
 }

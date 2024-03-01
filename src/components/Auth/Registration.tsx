@@ -6,11 +6,8 @@ const ShippingForm = () => {
     email: "",
     phoneNumber: "",
     address: "",
-    shipmentType: "personal",
-    companyName: "",
-    companyAddress: "",
-    companyPhoneNumber: "",
-    companyRegistrationNumber: "",
+    DateOfBirth: "",
+    parmanenentAddress: "",
   });
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -30,7 +27,9 @@ const ShippingForm = () => {
       method: "POST",
       body: JSON.stringify(formData),
     }).then((res) => {
-      res.json().then((res) =>{console.log(res);})
+      res.json().then((res) => {
+        console.log(res);
+      });
     });
   };
 
@@ -89,88 +88,39 @@ const ShippingForm = () => {
             className='w-full border-gray-300 rounded-md px-4 py-2 border peer input'
             required
           />
-          <label className='label peer-focus:top-[-8rem]'>Address</label>
+          <label className='label peer-focus:top-[-6rem]'>Address</label>
         </div>
 
-        {/* business */}
-        {formData.shipmentType === "business" && (
-          <>
-            <div className='mb-4 inputsContainer'>
-              <input
-                type='text'
-                name='companyName'
-                value={formData.companyName}
-                onChange={handleChange}
-                className=' input peer '
-                required
-              />
-              <label
-                className={`label ${formData.companyName ? "hidden" : ""}`}>
-                Company Name
-              </label>
-            </div>
-
-            <div className='mb-4 inputsContainer'>
-              <input
-                name='companyAddress'
-                value={formData.companyAddress}
-                onChange={handleChange}
-                className=' input peer '
-                required
-              />
-              <label className='label peer-focus:top-[-8rem]'>
-                Company Address
-              </label>
-            </div>
-
-            <div className='mb-4 inputsContainer'>
-              <input
-                type='tel'
-                name='companyPhoneNumber'
-                value={formData.companyPhoneNumber}
-                onChange={handleChange}
-                className=' input peer '
-                required
-              />
-              <label
-                className={`label ${
-                  formData.companyPhoneNumber ? "hidden" : ""
-                }`}>
-                Company Phone Number
-              </label>
-            </div>
-
-            <div className='mb-4 inputsContainer'>
-              <input
-                type='text'
-                name='companyRegistrationNumber'
-                value={formData.companyRegistrationNumber}
-                onChange={handleChange}
-                className=' input peer '
-                required
-              />
-              <label
-                className={`label ${
-                  formData.companyRegistrationNumber ? "hidden" : ""
-                }`}>
-                Company Registration Number
-              </label>
-            </div>
-          </>
-        )}
-
-        <div className='mb-4 inputsContainer '>
-          <label className='block mb-1 font-bold text-sm md:text-sm text-neutral-400'>Shipment Type</label>
-          <select
-            name='shipmentType'
-            value={formData.shipmentType}
+        <div className='mb-4 inputsContainer'>
+          <input
+            type='date'
+            name='DBO'
+            value={formData.DateOfBirth}
             onChange={handleChange}
-            className='w-[10rem] border-gray-300 rounded-md px-4 py-2 bg-transparent'>
-            <option value='personal'>Personal</option>
-            <option value='business'>Business</option>
-          </select>
+            className=' input peer '
+            required
+          />
+          <label className={`label ${formData.DateOfBirth ? "hidden" : ""}`}>
+            Date of birth
+          </label>
         </div>
 
+        <div className='mb-4 inputsContainer'>
+          <input
+            type='text'
+            name='pAddress'
+            value={formData.parmanenentAddress}
+            onChange={handleChange}
+            className=' input peer '
+            required
+          />
+          <label
+            className={`label ${formData.parmanenentAddress ? "hidden" : ""}`}>
+            permanent address
+          </label>
+        </div>
+
+        {/* button */}
         <div className='my-[1rem] pb-5'>
           <button
             type='submit'

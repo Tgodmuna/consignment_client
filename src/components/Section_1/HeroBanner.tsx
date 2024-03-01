@@ -8,7 +8,7 @@ const HeroBanner = () => {
       <div className='mt-[4rem]'>
         <Typewriter
           className={
-            " uppercase text-center underline text-2xl font-sans  font-bold transition-all duration-300 p-1  text-lime-300"
+            " uppercase text-center underline text2xl md:text-4xl font-sans  font-bold transition-all duration-300 p-1  text-slate-300"
           }
           text='international logistics'
           delay={100}
@@ -20,7 +20,7 @@ logistics '
           delay={100}
         />
         <Typewriter
-          className='text-green-700  italic uppercase text-3xl font-extrabold text-center'
+          className='text-white  italic uppercase text-3xl font-extrabold text-center'
           text='services provider'
           delay={400}
         />
