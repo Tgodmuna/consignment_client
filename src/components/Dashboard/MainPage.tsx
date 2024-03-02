@@ -5,11 +5,23 @@ import {
 } from "react-icons/md";
 import { GiCheckMark } from "react-icons/gi";
 import { CiDeliveryTruck } from "react-icons/ci";
+import React, { useState } from "react";
+import AddParcelForm from "./Orders";
+import OrderList from "./OrderList";
+
+type OrderPropType = {
+  sender: string;
+  recipient: string;
+  weight: string;
+  destination: string;
+  price: number;
+}[];
 
 const MainPage = () => {
+  const [IsOrderShowing, setIsOrderShowing] = useState(false);
   return (
-    <div className='flex rounded-lg h-full flex-col self-start mt-[1rem] bg-slate-50 w-[100%] p-3 shadow-lg shadow-gray-500 '>
-      <div className='flex flex-col my-4'>
+    <div className='flex rounded-lg h-auto flex-col self-start mt-[1rem] bg-slate-50 w-[100%] p-3 shadow-lg shadow-gray-500 '>
+      <div className='flex flex-col my-4 gap-3'>
         <h1 className='text-3xl font-bold text-start items-start text-cyan-900 capitalize'>
           hello user{" "}
         </h1>
@@ -17,24 +29,15 @@ const MainPage = () => {
           {" "}
           here is the overall status of your orders
         </p>
-        <button type='button' className='text-xs hover:bg-green-600 text-white items-center p-2 w-fit rounded bg-green-400 flex font-semibold border'>
-          Add parcels
-          <MdOutlineAddCircleOutline className='text-cyan-500 mx-1 hover:scale-105 hover:cursor-pointer' />
+        <button
+          onClick={() => setIsOrderShowing(true)}
+          type='button'
+          className='text-xs hover:bg-green-600 uppercase text-white items-center p-2 w-fit rounded bg-green-400 flex font-semibold border'>
+          place shippment
+          <MdOutlineAddCircleOutline className='text-cyan-500 text-xl mx-1 hover:scale-105 hover:cursor-pointer' />
         </button>
       </div>
-      <p className='text-sm text-neutral-900 capitalize'>recent updates</p>
-
-      <div className='flex flex-col p-2'>
-        {/* //todo: remember to copy this shape for API */}
-        <div className='flex flex-col p-3 bg-slate-300'>
-          <p className=' text-xs p-0 text-black'>no updates yet</p>
-          <p className='text-xs flex capitalize '>priority:high</p>
-          <p className='text-xs flex capitalize'>
-            tracking-id: <span>{""}</span>
-          </p>
-        </div>
-      </div>
-
+      {IsOrderShowing && <AddParcelForm />}
       <Stat />
     </div>
   );
