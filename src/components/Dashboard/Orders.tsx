@@ -94,7 +94,12 @@ const AddParcelForm = () => {
         />
         <button
           onClick={() => {
-            if (parcel) {
+            if (
+              parcel.destination &&
+              parcel.price &&
+              parcel.recipient &&
+              parcel.weight
+            ) {
               // Generate price for the parcel based on weight (for demonstration, a simple calculation is used)
               const price = parseFloat(parcel.weight) * 5; // Assuming price is $5 per kg
               const newParcel: Parcel = {
@@ -143,10 +148,6 @@ const AddParcelForm = () => {
                 <button
                   type='button'
                   onClick={(e) => {
-                    console.log(
-                      `parcel ${index} shipped`,
-                      parcelsToShip[index],
-                    );
                     handleSubmit(index);
                     e.preventDefault();
                   }}
