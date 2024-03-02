@@ -4,6 +4,7 @@ const ShippingForm = () => {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
+    userName: "",
     phoneNumber: "",
     address: "",
     DateOfBirth: "",
@@ -17,19 +18,22 @@ const ShippingForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(e.target);
     setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
     fetch("https://chikaconsignment1-1.onrender.com/register", {
       method: "POST",
       body: JSON.stringify(formData),
     }).then((res) => {
-      res.json().then((res) => {
-        console.log(res);
-      });
+      res
+        .json()
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => console.log(err));
     });
   };
 
@@ -68,6 +72,20 @@ const ShippingForm = () => {
 
         <div className='mb-4 inputsContainer'>
           <input
+            type='text'
+            name='userName'
+            value={formData.userName}
+            onChange={handleChange}
+            className=' input peer '
+            required
+          />
+          <label className={`label ${formData.userName ? "hidden" : ""}`}>
+            username
+          </label>
+        </div>
+
+        <div className='mb-4 inputsContainer'>
+          <input
             type='tel'
             name='phoneNumber'
             value={formData.phoneNumber}
@@ -94,7 +112,7 @@ const ShippingForm = () => {
         <div className='mb-4 inputsContainer'>
           <input
             type='date'
-            name='DBO'
+            name='DateOfBirth'
             value={formData.DateOfBirth}
             onChange={handleChange}
             className=' input peer '
@@ -108,7 +126,7 @@ const ShippingForm = () => {
         <div className='mb-4 inputsContainer'>
           <input
             type='text'
-            name='pAddress'
+            name='parmanenentAddress'
             value={formData.parmanenentAddress}
             onChange={handleChange}
             className=' input peer '
