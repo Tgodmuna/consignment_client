@@ -4,12 +4,15 @@ import { FaMapLocationDot } from "react-icons/fa6";
 import { LuLayoutList } from "react-icons/lu";
 import { CiSettings } from "react-icons/ci";
 import { RiLogoutCircleLine } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
+  const navi = useNavigate();
+
   //links
   const SideLinks: string[] = [
     "dashboard",
-    " Shipment",
+    " Shipments",
     "Tracking",
     "setting",
   ];
@@ -33,13 +36,13 @@ const SideBar = () => {
 
     //return JSX (each link)
     return (
-      <div className='flex flex-col group'>
-        <li
+      <div onClick={() => ""} className='flex flex-col group'>
+        <div
           key={index}
           className='peer uppercase group items-center text-xs max-w-full flex gap-2 p-2 mx-3 rounded-md hover:scale-95 transition-all duration-500  hover:text-black'>
           {AppendIcons()}
           {item}
-        </li>
+        </div>
         <div className='w-0 opacity-0 group-hover:opacity-95 group-hover:w-full transition-all duration-700 border-2 border-cyan-900 rounded-lg'></div>
       </div>
     );
