@@ -5,17 +5,13 @@ import {
 } from "react-icons/md";
 import { GiCheckMark } from "react-icons/gi";
 import { CiDeliveryTruck } from "react-icons/ci";
-import React, { useState } from "react";
+import { useState } from "react";
 import AddParcelForm from "./Orders";
-import OrderList from "./OrderList";
+import { Outlet } from "react-router-dom";
 
-type OrderPropType = {
-  sender: string;
-  recipient: string;
-  weight: string;
-  destination: string;
-  price: number;
-}[];
+
+
+//todo: conditionally render outLet leater
 
 const MainPage = () => {
   const [IsOrderShowing, setIsOrderShowing] = useState(false);
@@ -39,6 +35,7 @@ const MainPage = () => {
       </div>
       {IsOrderShowing && <AddParcelForm />}
       <Stat />
+      <Outlet />
     </div>
   );
 };
