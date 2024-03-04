@@ -35,7 +35,6 @@ const MainPage = () => {
       </div>
       {IsOrderShowing && <AddParcelForm />}
       <Stat />
-      <Outlet />
     </div>
   );
 };

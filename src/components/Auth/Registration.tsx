@@ -1,4 +1,7 @@
-import React, { useEffect, useState } from "react";
+import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
+import LoadingSpinner from "../utilities/Spinner";
+import { useNavigate, useNavigation } from "react-router-dom";
 
 const ShippingForm = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +16,7 @@ const ShippingForm = () => {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [Response, setResponse] = useState("");
+  const [IsLoading, setIsLoading] = useState(false);
 
   useEffect(() => console.log(Response), [Response]);
 
@@ -23,20 +27,25 @@ const ShippingForm = () => {
   };
 
   const handleSubmit = (e) => {
+    setIsLoading(true);
     e.preventDefault();
-    fetch("https://chikaconsignment1-1.onrender.com/register", {
-      method: "POST",
-      body: JSON.stringify(formData),
-    }).then((res) => {
-      res
-        .json()
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => console.log(err));
-    });
+    if (BTNref.current) BTNref.current.disabled = true;
+    axios
+      .postForm("https://chikaconsignment1-1.onrender.com/register")
+      .then((res) => {
+        console.log(res);
+        setIsLoading(false);
+        if (BTNref.current) BTNref.current.disabled = false;
+      })
+      .catch((err) => {
+        if (BTNref.current) BTNref.current.disabled = false;
+        console.log(err);
+        setIsLoading(false);
+      });
   };
 
+  const BTNref = useRef<HTMLButtonElement>(null);
+  const naviSignIn = useNavigate();
   return (
     <div className=' mx-auto pt-[6rem] rounded-xl shadow-md border md:max-w-[100%] flex flex-col items-center justify-center RegisterBg '>
       <form
@@ -141,10 +150,24 @@ const ShippingForm = () => {
         {/* button */}
         <div className='my-[1rem] pb-5'>
           <button
+            ref={BTNref}
             type='submit'
-            className='bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 border'>
+            className={`bg-blue-500 ${
+              IsLoading ? "cursor-not-allowed opacity-20" : "cursor-default"
+            } text-white px-4 py-2 rounded-md hover:bg-blue-600 border  items-center flex w-fit gap-2`}>
             Submit
+            <LoadingSpinner className={`${!IsLoading && "hidden"}`} />
           </button>
+        </div>
+        <div className='flex'>
+          <p className='text-slate-100  capitalize '>Already has an account?</p>
+          <span
+            onClick={() => {
+              naviSignIn("/signIn");
+            }}
+            className='text-yellow-500 capitalize hover:to-black hover:cursor-pointer '>
+            sign in
+          </span>
         </div>
       </form>
     </div>

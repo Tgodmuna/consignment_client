@@ -12,9 +12,9 @@ const SideBar = () => {
   //links
   const SideLinks: string[] = [
     "dashboard",
-    " Shipments",
-    "Tracking",
-    "setting",
+    "shipment",
+    "settings",
+    "trackShips",
   ];
 
   const SIDE_LINK = SideLinks.map((item, index) => {
@@ -23,23 +23,29 @@ const SideBar = () => {
       switch (item) {
         case "dashboard":
           return <MdDashboard className='icon' />;
-        case " Shipment":
+        case "shipment":
           return <MdOutlineManageHistory className='icon' />;
-        case "Tracking":
+        case "trackShips":
           return <FaMapLocationDot className='icon' />;
         case "order":
           return <LuLayoutList className='icon' />;
-        case "setting":
+        case "settings":
           return <CiSettings className='icon' />;
       }
     };
 
     //return JSX (each link)
     return (
-      <div onClick={() => ""} className='flex flex-col group'>
+      <div
+        key={index}
+        onClick={() => {
+          navi(`/dashboard/${item}`);
+          console.log(`/dashboard/${item}`);
+        }}
+        className='flex flex-col group hover:cursor-pointer'>
         <div
           key={index}
-          className='peer uppercase group items-center text-xs max-w-full flex gap-2 p-2 mx-3 rounded-md hover:scale-95 transition-all duration-500  hover:text-black'>
+          className='peer hover:bg-slate-500 uppercase group items-center text-xs max-w-full flex gap-2 p-2 mx-3 rounded-md hover:scale-95 transition-all duration-500  hover:text-black'>
           {AppendIcons()}
           {item}
         </div>

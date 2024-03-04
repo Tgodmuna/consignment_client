@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import axios from "axios";
 
 const LeftSideBar = () => {
   // State to store tracking data
@@ -25,12 +26,12 @@ const LeftSideBar = () => {
       longitude: -74.006,
       status: "In transit",
     };
-    fetch("jbjkb").then((res) => {
-      res
-        .json()
-        .then((res) => setTrackingData(res))
-        .catch((err) => console.log("error fetching coordinates", err));
-    });
+    axios.get("https://chikaconsignment1-1.onrender.com/coordinates")
+      .then((res) => {
+        console.log(res.data);
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
 
     // Set the tracking data in state and update the map
     setTrackingData(mockTrackingData);
@@ -74,7 +75,7 @@ const LeftSideBar = () => {
   };
 
   return (
-    <aside className='h-full bg-slate-100 w-[25%] ml-4 fixed right-0 rounded-md flex gap-[3rem] flex-col border-2 border-cyan-900 p-3'>
+    <aside className='h-full bg-slate-100 w-[28%] ml-4 fixed right-0 rounded-md flex gap-[3rem] flex-col border-2 border-cyan-900 p-3'>
       <h1 className='text-xl text-neutral-500 capitalize text-center'>
         Real Time Parcel Tracker
       </h1>

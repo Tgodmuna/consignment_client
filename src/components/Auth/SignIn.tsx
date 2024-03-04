@@ -1,3 +1,5 @@
+import axios from "axios";
+import { error } from "console";
 import React, { useState } from "react";
 
 const SignInForm = () => {
@@ -5,6 +7,9 @@ const SignInForm = () => {
     emailOrPhone: "",
     password: "",
   });
+  const [Message, setMessage] = useState("");
+  const [IsRegistered, setIsRegistered] = useState(undefined);
+  const [NetworkError, setNetworkError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -12,24 +17,21 @@ const SignInForm = () => {
   };
 
   const handleSubmit = (e) => {
+    axios
+      .post("https://chikaconsignment1-1.onrender.com/login", formData)
+      .then((res) => {
+        console.log(res);
+        setMessage(res.data.message);
+        setIsRegistered(res.data.success);
+      })
+      .catch((er) => setNetworkError(er.message));
     e.preventDefault();
-    fetch("https://chikaconsignment1-1.onrender.com/login", {
-      method: "POST",
-      body: JSON.stringify(formData),
-    }).then((res) => {
-      res
-        .json()
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => console.log(err));
-    });
   };
 
   return (
-    <div className='mx-auto pt-16 rounded-xl shadow-md border md:max-w-full flex flex-col items-center justify-center RegisterBg'>
+    <div className='mx-auto pt-16 rounded-xl shadow-md border md:max-w-full flex flex-col items-center justify-centery'>
       <form
-        className='md:w-1/2 w-full p-8 glass-container rounded-lg flex flex-col items-center justify-center bg-gray-100 border-2  input peer-cyan-500'
+        className='md:w-1/2 w-full p-8 rounded-lg flex flex-col items-center justify-center bg-gray-100 border-2 border-cyan-500'
         onSubmit={handleSubmit}>
         <div className='mb-4 w-full'>
           <input
@@ -37,7 +39,7 @@ const SignInForm = () => {
             name='emailOrPhone'
             value={formData.emailOrPhone}
             onChange={handleChange}
-            className='w-full border-gray-300 rounded-md px-4 py-2 border input peer'
+            className='w-full border-gray-300 rounded-md px-4 py-2 border'
             placeholder='Email or Phone Number'
             required
           />
@@ -49,11 +51,21 @@ const SignInForm = () => {
             name='password'
             value={formData.password}
             onChange={handleChange}
-            className='w-full border-gray-300 rounded-md px-4 py-2 border input peer'
+            className='w-full border-gray-300 rounded-md px-4 py-2 border'
             placeholder='Password'
             required
           />
         </div>
+
+        <p
+          className={`${
+            Message === "No record" ? "block" : "hidden"
+          } text-red-500`}>
+          no user with {Message} found,try signin up
+        </p>
+        <p className={`${NetworkError ? "block text-red-500" : "hidden"}`}>
+          {NetworkError}
+        </p>
 
         <div className='mb-4 w-full'>
           <button
