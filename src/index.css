@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* leaflet css */
+@import "~leaflet/dist/leaflet.css";
+
 .navbar-links {
   @apply text-gray-300 text-[40px];
 }
@@ -116,7 +119,7 @@
   }
 }
 .label {
-  @apply w-fit peer-focus:transition-all  duration-200 peer-focus:top-[-4rem] text-slate-300 text-xs relative top-[-2rem] left-[1rem];
+  @apply w-fit uppercase peer-focus:transition-all  duration-200 peer-focus:top-[-4rem] text-slate-300 text-xs relative top-[-2rem] left-[1rem];
 }
 .input {
   @apply w-full md:max-w-[70%] border-t-0 bg-transparent border-l-0 border-r-0 appearance-none  border-gray-500   border;
@@ -146,4 +149,62 @@
 
 .icon {
   @apply text-gray-400 text-[1.4rem]  group-hover:animate-spin;
+}
+
+.loading-spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-spinner {
+  border: 8px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #3498db;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.overlay-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 30;
+}
+
+.invoice-card {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.close-button {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.close-button:hover {
+  background-color: #2980b9;
 }
