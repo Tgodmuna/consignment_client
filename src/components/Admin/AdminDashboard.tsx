@@ -1,10 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import Icon from "../utilities/Icon";
 import axios from "axios";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const AdminDashboard = () => {
+  const NavigateLinks = useNavigate();
   const [markerPosition, setMarkerPosition] = useState<[number, number]>([
     51.505, -0.09,
   ]);
@@ -27,20 +29,19 @@ const AdminDashboard = () => {
       setcoordinates((prev) => {
         return { ...prev, lat: e.latlng.lat, lon: e.latlng.lng };
       });
+      sendCoordinnatesToSever(e.latlng.lat, e.latlng.lng);
       setMarkerPosition([e.latlng.lat, e.latlng.lng]);
-    //   sendCoordinnatesToSever({ lat: e.latlng.lat, lon: e.latlng.lng });
       GetLocationName({ lat: e.latlng.lat, lon: e.latlng.lng });
     });
     return null;
   };
 
   //send coordinates
-  const sendCoordinnatesToSever = (coordinates: {
-    lat: number;
-    lon: number;
-  }) => {
+  const sendCoordinnatesToSever = (lat: number, lon: number) => {
+    const data = { lat, lon };
+    console.log("before posting:", data);
     axios
-      .post("kjjkhjkh", { coordinates })
+      .post("https://chikaconsignment1-1.onrender.com/store-coordinate", data)
       .then((res) => {
         console.log(res.data);
       })
@@ -57,14 +58,28 @@ const AdminDashboard = () => {
       )
       .then((res) => {
         console.log(res.data);
-          setLocation(res.data);
-          //save to 
+        setLocation(res.data);
+        //save to
       })
       .catch((err) => console.log(err.message));
   };
 
-  return (
-    <div className='flex h-screen'>
+  //check if the Pathname is a valid admin Route
+  let LOCATION = useLocation();
+  const isAdmin =
+    LOCATION.pathname === "/Admin/dashboard" ||
+    LOCATION.pathname === "/Admin/orders" ||
+    LOCATION.pathname === "/Admin/contact-Clients";
+
+  const renderOutRet = () => {
+    if (isAdmin) {
+      return <Outlet />;
+    }
+    return null;
+  };
+
+  const mainJsx = (
+    <>
       {/* Sidebar */}
       <aside className='bg-gray-800 text-white w-64'>
         {/* Sidebar Content */}
@@ -72,28 +87,30 @@ const AdminDashboard = () => {
           <h1 className='text-2xl font-bold mb-4'>Admin Dashboard</h1>
           {/* Sidebar Menu */}
           <ul className='space-y-2 flex flex-col gap-[3rem]'>
-            <li>
-              <a href='#' className='block py-2 px-4 hover:bg-gray-700 rounded'>
+            <li onClick={() => NavigateLinks("/Admin/dashboard")}>
+              <p className='block py-2 px-4 hover:bg-gray-700 rounded'>
                 Dashboard
-              </a>
+              </p>
             </li>
-            <li>
-              <a href='#' className='block py-2 px-4 hover:bg-gray-700 rounded'>
+            <li onClick={() => NavigateLinks("/Admin/contact-Clients")}>
+              <p className='block py-2 px-4 hover:bg-gray-700 rounded'>
                 Orders
-              </a>
+              </p>
             </li>
             <li>
-              <a href='#' className='block py-2 px-4 hover:bg-gray-700 rounded'>
+              <p
+                onClick={() => NavigateLinks("/Admin/contact-Clients")}
+                className='block py-2 px-4 hover:bg-gray-700 rounded'>
                 Shipments
-              </a>
+              </p>
             </li>
 
             <li className='w-[10rem] capitalize'>
-              <a
-                href='#'
+              <p
+                onClick={() => NavigateLinks("/Admin/contact-Clients")}
                 className='block py-2 px-4 hover:bg-gray-700 rounded w-fit'>
                 push notification and an email to client dashboard
-              </a>
+              </p>
             </li>
           </ul>
         </div>
@@ -102,7 +119,6 @@ const AdminDashboard = () => {
       {/* Main Content Area */}
       <main className='flex-1 overflow-scroll bg-gray-100 p-6'>
         <h2 className='text-2xl font-bold mb-4'>Map</h2>
-
         {/* Map Component */}
         <div className='w-full h-[90%] bg-white rounded-md shadow-md mb-4'>
           <MapContainer
@@ -112,7 +128,7 @@ const AdminDashboard = () => {
             style={{ height: "100%" }}>
             <GetCoordinates />
             <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
-            <Marker position={markerPosition} icon={Icon} >
+            <Marker position={markerPosition} icon={Icon}>
               <Popup className='capitalize text-neutral-600' autoClose={true}>
                 hello , this where your Parcel is
               </Popup>
@@ -121,7 +137,7 @@ const AdminDashboard = () => {
         </div>
 
         {/* locationDetails */}
-        <div className='w-[70%] m-auto  h-[50%] justify-between flex flex-col bg-gray-200 rounded-md shadow-md p-4 flex-wrap gap-[]'>
+        <div className='w-[100%] m-auto  h-auto justify-between flex flex-col bg-gray-200 rounded-md shadow-md p-4  gap-[]'>
           <h2 className='text-lg font-bold mb-2'>Location Details</h2>
           <div className='mb-2 flex gap-3'>
             <p className='font-semibold'>Display Name:</p>
@@ -149,7 +165,11 @@ const AdminDashboard = () => {
           </div>
         </div>
       </main>
-    </div>
+    </>
+  );
+
+  return (
+    <div className='flex h-screen'>{isAdmin ? renderOutRet() : mainJsx}</div>
   );
 };
 
