@@ -17,7 +17,6 @@ const LeftSideBar = () => {
   // Reference to the Leaflet map instance
   const map = useRef<L.Map | null>(null);
 
-  // Function to fetch tracking data (simulate with mock data for now)
   const fetchTrackingData = useCallback(() => {
     // Simulate fetching tracking data from the backend
     const mockTrackingData = {

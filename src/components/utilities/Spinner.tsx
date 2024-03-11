@@ -3,8 +3,8 @@ type Prop = {
 };
 const LoadingSpinner = ({ className }: Prop) => {
   return (
-    <div className={` loading-spinner-container`}>
-      <div className={`${className} loading-spinner`}></div>
+    <div className={` loading-spinner-container {${className}} `}>
+      <div className={` loading-spinner`}></div>
     </div>
   );
 };

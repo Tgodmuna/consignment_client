@@ -208,3 +208,8 @@
 .close-button:hover {
   background-color: #2980b9;
 }
+
+/* admin */
+.users p {
+  @apply flex flex-wrap text-xs gap-1 capitalize font-semibold;
+}
