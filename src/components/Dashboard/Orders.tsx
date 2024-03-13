@@ -1,39 +1,42 @@
 import axios from "axios";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import LoadingSpinner from "../utilities/Spinner";
 import InvoiceCard from "../utilities/InvoiceCard";
 
-interface Parcel {
+type eachParcel = {
   sender: string;
   recipient: string;
   weight: string;
   destination: string;
   price: number;
-  isLoading: boolean;
-  isShipped: boolean; // Add a property to track shipping status
-}
+  coordinates: { lat: number; lon: number };
+  isLoading?: boolean;
+  isShipped?: boolean;
+};
 
-const AddParcelForm = () => {
-  const [parcel, setParcel] = useState<Parcel>({
+type orderResponseType = {
+  sender: string;
+  recipient: string;
+  weight: string;
+  destination: string;
+  price: number;
+  trackingId: string;
+};
+
+const AddeachParcelForm = () => {
+  const [eachParcel, seteachParcel] = useState<eachParcel>({
     sender: "",
     recipient: "",
     weight: "",
     destination: "",
     price: 0,
+    coordinates: { lat: 12098998, lon: 65675578587 },
     isLoading: false,
     isShipped: false,
   });
-  const [parcelsToShip, setParcelsToShip] = useState<Parcel[]>([]);
-  const [IsLoading, setIsLoading] = useState(false);
+  const [eachParcelsToShip, seteachParcelsToShip] = useState<eachParcel[]>([]);
   const [isInVoiceShowing, setisInVoiceShowing] = useState(false);
-  const [OrderResponse, setOrderResponse] = useState<{
-    sender: string;
-    recipient: string;
-    weight: string;
-    destination: string;
-    price: number;
-    trackingId: string;
-  }>({
+  const [OrderResponse] = useState<orderResponseType>({
     sender: "",
     recipient: "",
     weight: "",
@@ -44,48 +47,55 @@ const AddParcelForm = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setParcel((prevParcel) => ({
-      ...prevParcel,
+    seteachParcel((preveachParcel) => ({
+      ...preveachParcel,
       [name]: value,
     }));
   };
 
   const handleSubmit = (i: number | undefined) => {
     if (i !== undefined) {
-      const updatedParcels = [...parcelsToShip];
-      updatedParcels[i].isLoading = true;
-      setParcelsToShip(updatedParcels);
+      const updatedeachParcels = [...eachParcelsToShip];
+      updatedeachParcels[i].isLoading = true;
+      seteachParcelsToShip(updatedeachParcels);
+      const userID = localStorage.getItem("userID");
+      if (userID) {
+        let payload = {
+          data: eachParcelsToShip[i],
+          userID: userID,
+        };
+        console.log("payload inside if block", payload);
+        axios
+          .post(
+            `https://consignmentchika2.onrender.com/Parcels`,
+            JSON.stringify(payload),
+          )
+          .then((res) => {
+            if (res.status === 200) {
+              const updatedeachParcels = [...eachParcelsToShip];
+              updatedeachParcels[i].isLoading = false;
+              updatedeachParcels[i].isShipped = true;
+              seteachParcelsToShip(updatedeachParcels);
+              setisInVoiceShowing(true);
+            }
+          })
+          .catch((err) => {
+            const updatedeachParcels = [...eachParcelsToShip];
+            updatedeachParcels[i].isLoading = false;
+            seteachParcelsToShip(updatedeachParcels);
+            setisInVoiceShowing(false);
+            console.log(err);
+          });
+      }
 
-      axios
-        .post(
-          "https://chikaconsignment1-1.onrender.com/parcels",
-          parcelsToShip[i],
-        )
-        .then((res) => {
-          console.log(res);
-          if (res.status === 200) {
-            const updatedParcels = [...parcelsToShip];
-            updatedParcels[i].isLoading = false;
-            updatedParcels[i].isShipped = true;
-            setParcelsToShip(updatedParcels);
-            setisInVoiceShowing(true);
-          }
-        })
-        .catch((err) => {
-          const updatedParcels = [...parcelsToShip];
-          updatedParcels[i].isLoading = true;
-          setParcelsToShip(updatedParcels);
-          setisInVoiceShowing(false);
-          console.log(err);
-        });
-
-      // Reset parcel state
-      setParcel({
+      // Reset eachParcel state
+      seteachParcel({
         sender: "",
         recipient: "",
         weight: "",
         destination: "",
         price: 0,
+        coordinates: { lat: 0, lon: 0 },
         isLoading: false,
         isShipped: false,
       });
@@ -105,11 +115,11 @@ const AddParcelForm = () => {
           trackingId={OrderResponse.trackingId}
         />
       )}
-      <form className='mb-8 flex  items-center justify-center w-[35rem]  gap-3 '>
+      <form className='mb-8 flex md:flex-row flex-col   items-center justify-center max-w-[100%]  gap-3 '>
         <input
           type='text'
           name='sender'
-          value={parcel.sender}
+          value={eachParcel.sender}
           onChange={handleChange}
           placeholder='Sender'
           className='block w-full border border-gray-300 rounded-md py-2 px-3 mb-3'
@@ -118,7 +128,7 @@ const AddParcelForm = () => {
         <input
           type='text'
           name='recipient'
-          value={parcel.recipient}
+          value={eachParcel.recipient}
           onChange={handleChange}
           placeholder='Recipient'
           className='block w-full border border-gray-300 rounded-md py-2 px-3 mb-3'
@@ -127,7 +137,7 @@ const AddParcelForm = () => {
         <input
           type='text'
           name='weight'
-          value={parcel.weight}
+          value={eachParcel.weight}
           onChange={handleChange}
           placeholder='Weight (kg)'
           className='block w-full border border-gray-300 rounded-md py-2 px-3 mb-3'
@@ -136,7 +146,7 @@ const AddParcelForm = () => {
         <input
           type='text'
           name='destination'
-          value={parcel.destination}
+          value={eachParcel.destination}
           onChange={handleChange}
           placeholder='Destination'
           className='block w-full border border-gray-300 rounded-md py-2 px-3 mb-3'
@@ -144,33 +154,37 @@ const AddParcelForm = () => {
         />
         <button
           onClick={() => {
-            if (parcel.destination && parcel.recipient && parcel.weight) {
-              // Generate price for the parcel based on weight (for demonstration, a simple calculation is used)
-              const newprice = parseFloat(parcel.weight) * 5; // Assuming price is $5 per kg
-              const newParcel: Parcel = {
-                ...parcel,
+            if (
+              eachParcel.destination &&
+              eachParcel.recipient &&
+              eachParcel.weight
+            ) {
+              // Generate price for the eachParcel based on weight
+              const newprice = parseFloat(eachParcel.weight) * 5; // Assuming price is $5 per kg
+              const neweachParcel: eachParcel = {
+                ...eachParcel,
                 price: newprice,
               };
-              setParcelsToShip((prevParcels) => [...prevParcels, newParcel]);
+              seteachParcelsToShip((prevParcels) => [...prevParcels, neweachParcel]);
             }
           }}
           type='button'
-          className='bg-blue-500 text-xs w-full  text-white py-2 px-4 rounded-md hover:bg-blue-600 flex items-center gap-1'>
-          Add Parcel
+          className='bg-blue-500 text-xs w-full text-center text-white py-2 px-4 rounded-md hover:bg-blue-600 flex items-center gap-1'>
+          Add eachParcel
         </button>
       </form>
 
-      {/* parcel list available for shipping */}
-      {parcelsToShip.length > 0 && (
+      {/* eachParcel list available for shipping */}
+      {eachParcelsToShip.length > 0 && (
         <div className='bg-slate-300 w-full p-3'>
-          <h2 className='text-2xl font-bold mb-4 text-green-600 uppercase'>
-            parcels ready to ship (Pending Parcels)
+          <h2 className='text-xl font-bold mb-4 text-green-600 uppercase'>
+            each Parcels ready to ship (Pending eachParcels)
           </h2>
-          <ul className='mb-4 flex flex-wrap items-cente justify-center'>
-            {parcelsToShip.map((p, index) => (
+          <ul className='mb-4 flex flex-col items-cente justify-center'>
+            {eachParcelsToShip.map((p, index) => (
               <li
                 key={index}
-                className='border-2 border-neutral-200-300 rounded-md py-2 px-3 mb-2 flex items-center gap-3'>
+                className=' hover:cursor-pointer flex-wrap hover:odd:bg-gray-500 hover:even:bg-slate-400 border-2 border-neutral-200-300 rounded-md py-2 px-3 mb-2 flex items-center justify-between'>
                 <p className='text-xs capitalize'>
                   <span className='font-bold text-sm'>Sender:</span> {p.sender}
                 </p>
@@ -209,4 +223,4 @@ const AddParcelForm = () => {
   );
 };
 
-export default AddParcelForm;
+export default AddeachParcelForm;

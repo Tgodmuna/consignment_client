@@ -12,9 +12,10 @@ type mapPropType = {
   };
   className?: string;
   userId?: number;
+  parcelID?: string;
 };
 
-const Map = (prop: mapPropType) => {
+const Map = ({ parcelID, className, userId }: mapPropType) => {
   //location
   const [Location, setLocation] = useState<LocationProp | null>(null);
 
@@ -23,21 +24,12 @@ const Map = (prop: mapPropType) => {
     51.505, -0.09,
   ]);
 
-  //coordinates for moving parcels at the clients side
-  const [coordinates, setcoordinates] = useState<
-    | {
-        lat: number;
-        lon: number;
-      }
-    | undefined
-  >(undefined);
-
   //send coordinates to server
   const sendCoordinnatesToSever = (lat: number, lon: number) => {
-    const data = { lat, lon };
+    const data = { coordinates: { lat: lat, lon: lon }, parcelID };
     axios
       .post(
-        `https://chikaconsignment1-1.onrender.com/updateCoordinates?userId=${prop.userId}`,
+        `https://consignmentchika2.onrender.com/updateCoordinates?userId=${userId}`,
         JSON.stringify(data),
       )
       .then((res) => {
@@ -52,9 +44,6 @@ const Map = (prop: mapPropType) => {
   const GetCoordinates = () => {
     const mapInstance = useMap();
     mapInstance.on("click", (e) => {
-      setcoordinates((prev) => {
-        return { ...prev, lat: e.latlng.lat, lon: e.latlng.lng };
-      });
       sendCoordinnatesToSever(e.latlng.lat, e.latlng.lng);
       setMarkerPosition([e.latlng.lat, e.latlng.lng]);
       GetLocationName({ lat: e.latlng.lat, lon: e.latlng.lng });
@@ -78,7 +67,7 @@ const Map = (prop: mapPropType) => {
 
   return (
     <div
-      className={` ${prop.className} w-full flex flex-col   rounded-md shadow-md mb-4`}>
+      className={` ${className} w-full flex flex-col   rounded-md shadow-md mb-4`}>
       <MapContainer
         scrollWheelZoom={true}
         center={[51.505, -0.09]}

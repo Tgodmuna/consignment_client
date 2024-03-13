@@ -1,31 +1,25 @@
-import React from "react";
-import { MdDashboard, MdOutlineManageHistory } from "react-icons/md";
+import React, { useState } from "react";
+import { MdOutlineManageHistory } from "react-icons/md";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { LuLayoutList } from "react-icons/lu";
 import { CiSettings } from "react-icons/ci";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
+import { FaTimes } from "react-icons/fa";
 
 const SideBar = () => {
   const navi = useNavigate();
 
   //links
-  const SideLinks: string[] = [
-    "dashboard",
-    "shipment",
-    "settings",
-    "trackShips",
-  ];
+  const SideLinks: string[] = ["shipment", "settings", "OrderList"];
 
   const SIDE_LINK = SideLinks.map((item, index) => {
     //append icon base on sidelinks
     const AppendIcons = (): JSX.Element | undefined => {
       switch (item) {
-        case "dashboard":
-          return <MdDashboard className='icon' />;
         case "shipment":
           return <MdOutlineManageHistory className='icon' />;
-        case "trackShips":
+        case "OrderList":
           return <FaMapLocationDot className='icon' />;
         case "order":
           return <LuLayoutList className='icon' />;
@@ -40,7 +34,6 @@ const SideBar = () => {
         key={index}
         onClick={() => {
           navi(`/dashboard/${item}`);
-          console.log(`/dashboard/${item}`);
         }}
         className='flex flex-col group hover:cursor-pointer'>
         <div
@@ -55,12 +48,19 @@ const SideBar = () => {
   });
 
   return (
-    <div className=' flex flex-col h-full fixed self-start left-[0rem] justify-between items-center p-[0rem] border border-l-0 border-b-0 border-t-0 border-cyan-900 border-r-[3px] bg-slate-100 '>
+    <div className=' md:flex flex-col hidden h-full justify-between items-center p-[0rem] border border-l-0 border-b-0 border-t-0 border-cyan-900 border-r-[3px] bg-slate-100 '>
       <h1 className='text-2xl m-2 font-bold uppercase text-neutral-700 w-fit'>
         TrustGold
       </h1>
 
       <ul className='flex flex-col h-[25rem] gap-[1rem] mt-[3rem]'>
+        <li
+          className='uppercase p-2 cursor-pointer'
+          onClick={() => {
+            navi("/dashboard");
+          }}>
+          dashboard
+        </li>
         {SIDE_LINK}
       </ul>
 
@@ -71,34 +71,29 @@ const SideBar = () => {
 
 export default SideBar;
 
+type propType = { handler: (v) => any };
 //mobile sidebar
-const MobileSIdeBar = () => {
+export const MobileSIdeBar = ({ handler }: propType) => {
+  const [isActive, setisActive] = useState(true);
   //links
-  const SideLinks: string[] = [
-    "dashboard",
-    " Shipment",
-    "Tracking",
-    "order",
-    "setting",
-  ];
+  const SideLinks: string[] = ["settings", "OrderList", "order"];
+
+  handler(setisActive);
 
   const SIDE_LINK = SideLinks.map((item, index) => {
     //append icon base on sidelinks
     const AppendIcons = (): JSX.Element | undefined => {
       switch (item) {
-        case "dashboard":
-          return <MdDashboard className='icon' />;
-        case " Shipment":
+        case "shipment":
           return <MdOutlineManageHistory className='icon' />;
-        case "Tracking":
+        case "OrderList":
           return <FaMapLocationDot className='icon' />;
         case "order":
           return <LuLayoutList className='icon' />;
-        case "setting":
+        case "settings":
           return <CiSettings className='icon' />;
       }
     };
-
     //return JSX (each link)
     return (
       <li
@@ -110,7 +105,15 @@ const MobileSIdeBar = () => {
     );
   });
   return (
-    <div className='w-[65%] bg-slate-100 border-2 rounded-md h-[45rem] flex flex-col absolute'>
+    <div
+      className={`w-[65%] ${
+        !isActive ? "hidden" : "block"
+      } gap-[2.5rem] z-[100] bg-opacity-90 fixed items-center md:hidden bg-gray-300 border-2 rounded-md h-screen flex flex-col`}>
+      <FaTimes
+        onClick={() => setisActive(false)}
+        size={45}
+        className='hover:text-green-600 md:hidden block relative left-[-4.5rem]'
+      />
       {SIDE_LINK}
     </div>
   );

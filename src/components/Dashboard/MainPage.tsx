@@ -7,11 +7,7 @@ import { GiCheckMark } from "react-icons/gi";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { useState } from "react";
 import AddParcelForm from "./Orders";
-import { Outlet } from "react-router-dom";
 
-
-
-//todo: conditionally render outLet leater
 
 const MainPage = () => {
   const [IsOrderShowing, setIsOrderShowing] = useState(false);

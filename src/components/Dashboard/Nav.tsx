@@ -5,7 +5,7 @@ import { FaRegBell } from "react-icons/fa6";
 const Nav = () => {
   return (
       <nav className='max-w-full bg-slate-50 border-slate-300 rounded-lg border-2 flex justify-end '>
-      <div className='flex  justify-between items-center w-[10rem] '>
+      <div className='flex  justify-between items-center w-full md:w-[10rem] '>
         <FaRegBell
           className='hover:scale-50 hover:cursor-pointer hover:text-black text-neutral-500'
           size={30}

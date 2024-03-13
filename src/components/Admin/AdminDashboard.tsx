@@ -2,6 +2,7 @@
 import { Outlet, useLocation } from "react-router-dom";
 import SideBar from "./SideBar";
 import Map from "./Map";
+import MNavBar from "./MobileNav";
 
 const AdminDashboard = () => {
   //check if the Pathname is a valid admin Route
@@ -25,15 +26,15 @@ const AdminDashboard = () => {
         <h2 className='text-2xl font-bold mb-4'>Map</h2>
 
         {/* Map Component */}
-        <Map className="h-[100vw]" />
+        <Map className='h-[80vh]' />
         {renderOutRet()}
       </main>
     </>
   );
 
   return (
-    <div className='flex h-screen w-[100%]'>
-      {/* Sidebar */}
+    <div className='flex md:flex-row flex-col  h-screen w-[100%]'>
+      <MNavBar />
       <SideBar />
       {isAdmin ? renderOutRet() : mainJsx}
     </div>

@@ -213,3 +213,5 @@
 .users p {
   @apply flex flex-wrap text-xs gap-1 capitalize font-semibold;
 }
+
+

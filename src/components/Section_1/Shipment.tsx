@@ -88,7 +88,6 @@ const Shipment = () => {
   }, [TrackingOrderType]);
 
   const handleTrackOrderSubmit = () => {
-    // Phone number validation regex pattern to match all valid phone number formats worldwide
     const phoneNumRegex =
       /^(\+?\d{1,3}[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/;
 
@@ -183,16 +182,7 @@ const Shipment = () => {
         {!isTrackingFormType ? (
           <div className=' orderType flex justify-between items-center p-1 border border-gray-400 rounded-xl m-2'>
             <p className='text-slate-400 hover:text-white hover:bg-black text-center capitalize border border-l-0 border-t-0 border-b-0 border-r-gray-500 w-fit m-auto p-1'>
-              mobile
-            </p>
-            <p className='text-slate-400 hover:text-white hover:bg-black text-center uppercase border border-l-0 border-t-0 border-b-0 border-r-gray-500 w-fit m-auto p-1  '>
-              awb
-            </p>
-            <p className='text-slate-400 hover:text-white hover:bg-black text-center capitalize border border-l-0 border-t-0 border-b-0 border-r-gray-500 w-fit m-auto p-1  '>
-              order id
-            </p>
-            <p className='text-slate-400 hover:text-white hover:bg-black text-center uppercase  w-fit  '>
-              lrn
+              tracking number
             </p>
           </div>
         ) : (
@@ -290,7 +280,7 @@ const Shipment = () => {
           <>
             <input
               className='placeholder:uppercase border-[2px] border-slate-400  bg-transparent text-center text-gray-50 p-2 rounded-lg w-[100%]'
-              placeholder='enter your mobile number'
+              placeholder='enter your tracking number'
               type='tel'
               name='mobile Number'
               id='mob'
@@ -317,7 +307,9 @@ const Shipment = () => {
           className={` capitalize ${
             !IsLocalDestinations && "w-fit uppercase text-xs"
           } w-[10rem] m-auto flex items-center justify-center hover:opacity-20 p-1 my-4  rounded-lg bg-black text-white `}>
-          {IsLocalDestinations ? "Get OTP" : "Get O.T.P and start shipment"}
+          {IsLocalDestinations
+            ? "start tracking"
+            : "Get O.T.P and start shipment"}
           <FcCancel
             size={40}
             className={`animate-spin  ${
