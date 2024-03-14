@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
 import LoadingSpinner from "../utilities/Spinner";
-import { useNavigate,  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ShippingForm = () => {
   const [formData, setFormData] = useState({
@@ -30,11 +30,10 @@ const ShippingForm = () => {
     setIsLoading(true);
     e.preventDefault();
     if (BTNref.current) BTNref.current.disabled = true;
+    const payload = JSON.stringify(formData);
+    console.log("payload before posting", payload);
     axios
-      .post(
-        "https://consignmentchika2.onrender.com/Register",
-        JSON.stringify(formData),
-      )
+      .post("https://consignmentchika2.onrender.com/Register", payload)
       .then((res) => {
         console.log(res);
         setIsLoading(false);
