@@ -40,11 +40,9 @@
   }
 }
 
-.fade-in {
   .fade-in {
     animation: fadeIn 4s ease-in-out;
   }
-}
 
 .about_Image {
   opacity: 0;
