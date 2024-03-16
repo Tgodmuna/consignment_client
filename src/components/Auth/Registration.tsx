@@ -10,7 +10,7 @@ const ShippingForm = () => {
     userName: "",
     phoneNumber: "",
     address: "",
-    DateOfBirth: "",
+    DOB: "",
     parmanenentAddress: "",
   });
 
@@ -31,7 +31,7 @@ const ShippingForm = () => {
     e.preventDefault();
     if (BTNref.current) BTNref.current.disabled = true;
     const payload = JSON.stringify(formData);
-    console.log("payload before posting", payload);
+    console.log('payload before',payload);
     axios
       .post("https://consignmentchika2.onrender.com/Register", payload)
       .then((res) => {
@@ -136,13 +136,13 @@ const ShippingForm = () => {
         <div className='mb-4 inputsContainer'>
           <input
             type='date'
-            name='DateOfBirth'
-            value={formData.DateOfBirth}
+            name='DOB'
+            value={formData.DOB}
             onChange={handleChange}
             className=' input peer '
             required
           />
-          <label className={`label ${formData.DateOfBirth ? "hidden" : ""}`}>
+          <label className={`label ${formData.DOB ? "hidden" : ""}`}>
             Date of birth
           </label>
         </div>
