@@ -25,6 +25,11 @@ const SignInForm = () => {
       .post(
         "https://consignmentchika2.onrender.com/login",
         JSON.stringify(formData),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
       )
       .then((res) => {
         console.log(res);
@@ -44,6 +49,7 @@ const SignInForm = () => {
         setIsLoading(false);
         setNetworkError(er.message);
       });
+
     e.preventDefault();
   };
 

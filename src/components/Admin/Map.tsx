@@ -31,6 +31,11 @@ const Map = ({ parcelID, className, userId }: mapPropType) => {
       .post(
         `https://consignmentchika2.onrender.com/updateCoordinates?userId=${userId}`,
         JSON.stringify(data),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
       )
       .then((res) => {
         console.log(res.data);

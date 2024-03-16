@@ -69,6 +69,11 @@ const AddeachParcelForm = () => {
           .post(
             `https://consignmentchika2.onrender.com/Parcels`,
             JSON.stringify(payload),
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            },
           )
           .then((res) => {
             if (res.status === 200) {
@@ -165,7 +170,10 @@ const AddeachParcelForm = () => {
                 ...eachParcel,
                 price: newprice,
               };
-              seteachParcelsToShip((prevParcels) => [...prevParcels, neweachParcel]);
+              seteachParcelsToShip((prevParcels) => [
+                ...prevParcels,
+                neweachParcel,
+              ]);
             }
           }}
           type='button'
