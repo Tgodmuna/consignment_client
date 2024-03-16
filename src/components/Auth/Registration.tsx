@@ -1,5 +1,4 @@
-import axios from "axios";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import LoadingSpinner from "../utilities/Spinner";
 import { useNavigate } from "react-router-dom";
 
@@ -10,55 +9,82 @@ const ShippingForm = () => {
     userName: "",
     phoneNumber: "",
     address: "",
-    DOB: "",
+    DateOfBirth: "",
     parmanenentAddress: "",
   });
 
   const Navigate = useNavigate();
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [SuccessMsg, SetsuccessMsg] = useState("");
-  const [errMSG, seterrMSG] = useState("");
-  const [IsLoading, setIsLoading] = useState(false);
+  const [successMsg, setSuccessMsg] = useState("");
+  const [errMSG, setErrMSG] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     setIsLoading(true);
     e.preventDefault();
-    if (BTNref.current) BTNref.current.disabled = true;
+
     const payload = JSON.stringify(formData);
-    console.log('payload before',payload);
-    axios
-      .post("https://consignmentchika2.onrender.com/Register", payload)
-      .then((res) => {
-        console.log(res);
-        setIsLoading(false);
-        if (res.data.status === 201) {
-          SetsuccessMsg("Account created successfuilly");
-          alert(
-            "account created successfully,you can now login in using registered Email Addres",
-          );
+
+    try {
+      const response = await fetch(
+        "https://consignmentchika2.onrender.com/Register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: payload,
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log(data);
+
+      setIsLoading(false);
+
+      if (data.message === "New user registered successfully") {
+        setSuccessMsg("Account created successfully");
+        setShowNotification(true);
+
+        // Automatically navigate to the sign-in page after 2 seconds
+        setTimeout(() => {
           Navigate("/signIn");
-        } else if (res.data.status === 409) {
-          seterrMSG(res.data.message);
-        } else {
-          SetsuccessMsg("Account created");
-        }
-        if (BTNref.current) BTNref.current.disabled = false;
-      })
-      .catch((err) => {
-        if (BTNref.current) BTNref.current.disabled = false;
-        console.log(err);
-        seterrMSG(err.message);
-        setIsLoading(false);
-      });
+        }, 2000);
+      } else if (data.status === 409) {
+        setErrMSG(data.message);
+      } else {
+        setSuccessMsg("Account created");
+      }
+    } catch (error) {
+      console.error("Fetch error:", error);
+      setErrMSG(`An error occurred while processing your request and ${error}`);
+      setIsLoading(false);
+    }
   };
 
   const BTNref = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    let timeout;
+    if (showNotification) {
+      timeout = setTimeout(() => {
+        setShowNotification(false);
+      }, 2000);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [showNotification]);
+
   const naviSignIn = useNavigate();
 
   return (
@@ -66,6 +92,13 @@ const ShippingForm = () => {
       <form
         className=' glass-container md:w-[50%] p-3  w-full rounded-lg flex flex-col items-center justify-center bg-slate-100 py-4 pt-[3rem] px-2 border-[1px] border-cyan-500 '
         onSubmit={handleSubmit}>
+        {/* Success notification */}
+        {showNotification && (
+          <div className='bg-green-500 text-white px-4 py-2 rounded-md mt-2'>
+            {successMsg}
+          </div>
+        )}
+
         <div className='mb-4 inputsContainer'>
           <input
             type='text'
@@ -136,13 +169,13 @@ const ShippingForm = () => {
         <div className='mb-4 inputsContainer'>
           <input
             type='date'
-            name='DOB'
-            value={formData.DOB}
+            name='DateOfBirth'
+            value={formData.DateOfBirth}
             onChange={handleChange}
             className=' input peer '
             required
           />
-          <label className={`label ${formData.DOB ? "hidden" : ""}`}>
+          <label className={`label ${formData.DateOfBirth ? "hidden" : ""}`}>
             Date of birth
           </label>
         </div>
@@ -175,10 +208,10 @@ const ShippingForm = () => {
             ref={BTNref}
             type='submit'
             className={`bg-blue-500 cursor-pointer ${
-              IsLoading ? "cursor-not-allowed opacity-20" : "cursor-default"
+              isLoading ? "cursor-not-allowed opacity-20" : "cursor-default"
             } text-white px-4 py-2 rounded-md hover:bg-blue-600 border  items-center flex w-fit gap-2`}>
             Submit
-            {IsLoading && <LoadingSpinner />}
+            {isLoading && <LoadingSpinner />}
           </button>
         </div>
         <div className='flex'>
