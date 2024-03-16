@@ -90,7 +90,6 @@ function App() {
     setisLoading(true);
     axios.get("https://consignmentchika2.onrender.com/users").then((res) => {
       const data = res.data;
-      console.log("users from App.js", data);
       setUsers(data);
       setisLoading(false);
     });

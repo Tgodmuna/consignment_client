@@ -61,6 +61,7 @@
   transform: translateX(0);
 }
 
+
 .Animate {
   animation-name: slideFromBottom, fadeInFromTop;
   animation-duration: 2s;
