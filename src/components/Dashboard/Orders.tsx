@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import LoadingSpinner from "../utilities/Spinner";
 import InvoiceCard from "../utilities/InvoiceCard";
 
@@ -14,7 +14,7 @@ type eachParcel = {
   isShipped?: boolean;
 };
 
-type orderResponseType = {
+type InvoiceDataType = {
   sender: string;
   recipient: string;
   weight: string;
@@ -36,7 +36,8 @@ const AddeachParcelForm = () => {
   });
   const [eachParcelsToShip, seteachParcelsToShip] = useState<eachParcel[]>([]);
   const [isInVoiceShowing, setisInVoiceShowing] = useState(false);
-  const [OrderResponse] = useState<orderResponseType>({
+  const BTNref = useRef<null | HTMLButtonElement>(null);
+  const [InvoiceData, SetInvoiceData] = useState<InvoiceDataType>({
     sender: "",
     recipient: "",
     weight: "",
@@ -69,7 +70,6 @@ const AddeachParcelForm = () => {
           },
           userID: userID,
         };
-        console.log("payload inside if block", payload);
         axios
           .post(
             `https://consignmentchika2.onrender.com/Parcels`,
@@ -85,8 +85,22 @@ const AddeachParcelForm = () => {
               const updatedeachParcels = [...eachParcelsToShip];
               updatedeachParcels[i].isLoading = false;
               updatedeachParcels[i].isShipped = true;
+              //if parcel is shipped , disble button.
+              if (updatedeachParcels[i].isShipped && BTNref.current) {
+                BTNref.current.disabled = true;
+              }
               seteachParcelsToShip(updatedeachParcels);
               setisInVoiceShowing(true);
+              SetInvoiceData((prev) => ({
+                ...prev,
+                sender: eachParcelsToShip[i].sender,
+                recipient: eachParcelsToShip[i].recipient,
+                weight: eachParcelsToShip[i].weight,
+                price: eachParcelsToShip[i].price,
+                destination: eachParcelsToShip[i].destination,
+                trackingId: res.data.user.parcels[i].trackingNumber,
+              }));
+              console.log(res.data);
             }
           })
           .catch((err) => {
@@ -111,18 +125,21 @@ const AddeachParcelForm = () => {
       });
     }
   };
+  useEffect(() => {
+    console.log(InvoiceData);
+  }, [InvoiceData]);
 
   return (
     <div className='mx-auto flex flex-col items-center  w-full m-auto'>
       <h2 className='text-2xl font-bold mb-4'>Add Parcel</h2>
       {isInVoiceShowing && (
         <InvoiceCard
-          sender={OrderResponse.sender}
-          recipient={OrderResponse.recipient}
-          weight={OrderResponse.weight}
-          destination={OrderResponse.destination}
-          price={OrderResponse.price}
-          trackingId={OrderResponse.trackingId}
+          sender={InvoiceData.sender}
+          recipient={InvoiceData.recipient}
+          weight={InvoiceData.weight}
+          destination={InvoiceData.destination}
+          price={InvoiceData.price}
+          trackingId={InvoiceData.trackingId}
         />
       )}
       <form className='mb-8 flex md:flex-row flex-col   items-center justify-center max-w-[100%]  gap-3 '>
@@ -217,15 +234,20 @@ const AddeachParcelForm = () => {
                   {p.price.toFixed(2)}{" "}
                 </p>{" "}
                 <button
+                  ref={BTNref}
                   title='Click to start shipping'
                   type='button'
                   onClick={(e) => {
                     handleSubmit(index);
                     e.preventDefault();
                   }}
-                  className='bg-green-500 text-center w-[10rem] uppercase font-bold  text-[10px] text-white py-2 px-4 rounded-md hover:bg-green-600 mt-2 flex items-center justify-center gap-2'>
+                  className={`bg-green-500 text-center w-[10rem] uppercase font-bold  text-[10px] text-white py-2 px-4 rounded-md hover:bg-green-600 mt-2 flex items-center justify-center gap-2 ${
+                    eachParcelsToShip[index].isShipped
+                      ? "cursor-not-allowed"
+                      : "cursor-pointer"
+                  }`}>
                   {p.isShipped ? "shipped" : " not shipped"}
-                  {p.isLoading && <LoadingSpinner />}
+                  {p.isLoading && <LoadingSpinner className="bg-" />}
                 </button>
               </li>
             ))}
