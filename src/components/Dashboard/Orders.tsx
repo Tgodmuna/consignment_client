@@ -61,7 +61,12 @@ const AddeachParcelForm = () => {
       const userID = localStorage.getItem("userID");
       if (userID) {
         let payload = {
-          data: eachParcelsToShip[i],
+          data: {
+            destination: eachParcelsToShip[i].destination,
+            sender: eachParcelsToShip[i].sender,
+            recipient: eachParcelsToShip[i].recipient,
+            coordinates: eachParcelsToShip[i].coordinates,
+          },
           userID: userID,
         };
         console.log("payload inside if block", payload);
