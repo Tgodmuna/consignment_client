@@ -15,14 +15,16 @@ const InvoiceCard = ({
     <div
       className={`${
         isNotshowing && "hidden"
-      } overlay-container flex flex-col bg-green-400 w-max-w-[45%] `}>
+      } overlay-container flex flex-col  w-max-w-[45%] `}>
       <div className='invoice-card'>
         <h2>Shipment Details</h2>
         <p>
-          Your shipment from {sender} to {recipient} has been set to ship to{" "}
-          {destination}.
+          Your shipment from{" "}
+          <span className='font-bold uppercase'>{sender}</span> to {recipient}{" "}
+          has been set to ship to
+          <span className='font-bold uppercase'>{destination}</span>.
         </p>
-        <ul className=' text-xs flex flex-col items-center gap-3 justify-center'>
+        <ul className=' text-xs capitalize flex flex-col items-center gap-3 justify-center'>
           <li>Estimated delivery time: 3-5 business days</li>
           <li>Price: ${price.toFixed(2)}</li>
           <li>Tracking ID: {trackingId}</li>
@@ -33,7 +35,13 @@ const InvoiceCard = ({
           address and do not share your tracking details with any body to avoid
           otherwise
         </p>
-        <button onClick={() => setisNotshowing(true)} className='close-button'>
+        <button
+          type='button'
+          onClick={() => {
+            setisNotshowing((prev) => !prev);
+            console.log(isNotshowing);
+          }}
+          className='close-button'>
           Close
         </button>
       </div>
