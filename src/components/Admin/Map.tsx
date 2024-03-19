@@ -12,10 +12,10 @@ type mapPropType = {
   };
   className?: string;
   userId?: number;
-  parcelID?: string;
+  parcelId?: string;
 };
 
-const Map = ({ parcelID, className, userId }: mapPropType) => {
+const Map = ({ parcelId, className, userId }: mapPropType) => {
   //location
   const [Location, setLocation] = useState<LocationProp | null>(null);
 
@@ -26,15 +26,11 @@ const Map = ({ parcelID, className, userId }: mapPropType) => {
 
   //send coordinates to server
   const sendCoordinnatesToSever = (lat: number, lon: number) => {
-    const data = { coordinates: { lat: lat, lon: lon }, parcelID, userId };
+    const data = { coordinates: { lat: lat, lon: lon }, parcelId, userId };
     axios
-      .put(
-        `https://consignmentchika2.onrender.com/updateCoordinates`,
-        JSON.stringify(data),
-        { headers: { "Content-Type": "application/json" } },
-      )
+    .put(`https://consignmentchika2.onrender.com/updateCoordinates`, JSON.stringify(data), { headers: { "Content-Type": "application/json" } },)
       .then((res) => {
-        console.log(res.data);
+        console.log(res);
       })
       .catch((err) => {
         console.log(err.message);

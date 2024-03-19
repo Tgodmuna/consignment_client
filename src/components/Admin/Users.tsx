@@ -102,7 +102,7 @@ const Clients = ({ USERS, isloadin }: PropType) => {
                               <Map
                                 className='h-[35vw]'
                                 userId={client.ID}
-                                parcelID={client.parcels[index].trackingNumber}
+                                parcelId={client.parcels[index].trackingNumber}
                               />
                             </div>
                           </li>
