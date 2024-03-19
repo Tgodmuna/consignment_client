@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import LoadingSpinner from "../utilities/Spinner";
 import InvoiceCard from "../utilities/InvoiceCard";
 
@@ -125,6 +125,7 @@ const AddeachParcelForm = () => {
     }
   };
 
+
   return (
     <div className='mx-auto flex flex-col items-center  w-full m-auto'>
       <h2 className='text-2xl font-bold mb-4'>Add Parcel</h2>
@@ -243,7 +244,7 @@ const AddeachParcelForm = () => {
                       : "cursor-pointer"
                   }`}>
                   {p.isShipped ? "shipped" : " not shipped"}
-                  {p.isLoading && <LoadingSpinner className='bg-' />}
+                  {p.isLoading && <LoadingSpinner className="bg-" />}
                 </button>
               </li>
             ))}
