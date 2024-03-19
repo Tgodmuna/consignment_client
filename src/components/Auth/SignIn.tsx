@@ -32,7 +32,6 @@ const SignInForm = () => {
         },
       )
       .then((res) => {
-        console.log(res);
         setIsLoading(false);
         const token = res.data.token;
         const message = res.data.message;

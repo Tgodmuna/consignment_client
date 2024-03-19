@@ -100,7 +100,6 @@ const AddeachParcelForm = () => {
                 destination: eachParcelsToShip[i].destination,
                 trackingId: res.data.user.parcels[i].trackingNumber,
               }));
-              console.log(res.data);
             }
           })
           .catch((err) => {
@@ -125,9 +124,6 @@ const AddeachParcelForm = () => {
       });
     }
   };
-  useEffect(() => {
-    console.log(InvoiceData);
-  }, [InvoiceData]);
 
   return (
     <div className='mx-auto flex flex-col items-center  w-full m-auto'>
@@ -247,7 +243,7 @@ const AddeachParcelForm = () => {
                       : "cursor-pointer"
                   }`}>
                   {p.isShipped ? "shipped" : " not shipped"}
-                  {p.isLoading && <LoadingSpinner className="bg-" />}
+                  {p.isLoading && <LoadingSpinner className='bg-' />}
                 </button>
               </li>
             ))}

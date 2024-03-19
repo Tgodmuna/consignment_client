@@ -26,16 +26,12 @@ const Map = ({ parcelID, className, userId }: mapPropType) => {
 
   //send coordinates to server
   const sendCoordinnatesToSever = (lat: number, lon: number) => {
-    const data = { coordinates: { lat: lat, lon: lon }, parcelID };
+    const data = { coordinates: { lat: lat, lon: lon }, parcelID, userId };
     axios
-      .post(
-        `https://consignmentchika2.onrender.com/updateCoordinates?userId=${userId}`,
+      .put(
+        `https://consignmentchika2.onrender.com/updateCoordinates`,
         JSON.stringify(data),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        },
+        { headers: { "Content-Type": "application/json" } },
       )
       .then((res) => {
         console.log(res.data);
