@@ -4,7 +4,9 @@ import { FaFacebook, FaInbox, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer id='section8' className='bg-gray-900 text-white py-8'>
+    <footer
+      id='section8'
+      className='bg-gray-900 text-white py-8 relative top-[12rem]'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='flex flex-wrap justify-between items-center'>
           <div className='w-full md:w-1/3 lg:w-auto mb-4 md:mb-0'>
