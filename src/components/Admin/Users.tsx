@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { userDataType } from "../../App";
 import LoadingSpinner from "../utilities/Spinner";
 import Map from "./Map";
@@ -21,7 +21,6 @@ const Clients = ({ USERS, isloadin }: PropType) => {
     });
   };
 
-  useEffect(() => console.log(isexpanded), [isexpanded]);
   return (
     <div className='flex flex-col w-full'>
       {isloadin ? (
