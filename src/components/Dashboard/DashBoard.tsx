@@ -40,7 +40,7 @@ export const DashBoard = () => {
         <Nav  />
         {isUser ? <Outlet /> : <MainPage />}
       </div>
-      <LeftSideBar />
+      {/* <LeftSideBar /> */}
       {/* Step 3: Style the welcome message popup */}
       {showWelcomeMessage && (
         <div className='fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center'>
