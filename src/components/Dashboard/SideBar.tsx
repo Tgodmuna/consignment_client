@@ -7,7 +7,7 @@ import { RiLogoutCircleLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { FaTimes } from "react-icons/fa";
 
-const SideBar = () => {
+const SideBar = (prop: any) => {
   const navi = useNavigate();
 
   //links
@@ -48,7 +48,7 @@ const SideBar = () => {
   });
 
   return (
-    <div className=' md:flex flex-col hidden h-full justify-between items-center p-[0rem] border border-l-0 border-b-0 border-t-0 border-cyan-900 border-r-[3px] bg-slate-100 '>
+    <div className=' md:flex flex-col hidden h-full justify-between items-center p-[0rem] border border-l-0 border-b-0 border-t-0 border-cyan-900 border-r-[3px] bg-slate-900 text-slate-200 '>
       <h1 className='text-2xl m-2 font-bold uppercase text-neutral-700 w-fit'>
         TrustGold
       </h1>
@@ -64,7 +64,12 @@ const SideBar = () => {
         {SIDE_LINK}
       </ul>
 
-      <RiLogoutCircleLine size={40} />
+      <RiLogoutCircleLine
+        title='logout'
+        className='hover:cursor-pointer hover:scale-105 hover:text-red-500 '
+        onClick={() => prop.handleLogout()}
+        size={40}
+      />
     </div>
   );
 };
