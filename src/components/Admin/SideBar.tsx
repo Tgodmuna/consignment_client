@@ -1,4 +1,5 @@
 import React from "react";
+import { RiLogoutCircleLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
@@ -23,6 +24,15 @@ const SideBar = () => {
           <li className=' capitalize block py-2 px-4 hover:bg-gray-700 rounded'>
             Orders
           </li>
+          <RiLogoutCircleLine
+            title='logout'
+            className='hover:cursor-pointer hover:scale-105 hover:text-red-500 absolute ml-[5rem] bottom-[2rem]'
+            onClick={() => {
+              sessionStorage.removeItem("adminToken");
+              navigate("/");
+            }}
+            size={40}
+          />
         </ul>
       </div>
     </aside>
