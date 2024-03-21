@@ -7,10 +7,13 @@ const SignInForm = () => {
   const [formData, setFormData] = useState({
     email: "",
     phone: "",
+    password: "",
   });
   const [Message, setMessage] = useState("");
   const [NetworkError, setNetworkError] = useState("");
   const [IsLoading, setIsLoading] = useState(false);
+  const [isAdmin, setisAdmin] = useState(false);
+  const [isShipper, setisShipper] = useState(true);
   const BTNref = useRef<HTMLButtonElement>(null);
 
   const handleChange = (e) => {
@@ -18,13 +21,31 @@ const SignInForm = () => {
     setFormData({ ...formData, [name]: value });
   };
   const navigate = useNavigate();
+  const isAdminLogin = () => {
+    setisAdmin(true);
+    setisShipper(false);
+  };
+  const isShipperLogin = () => {
+    setisShipper(true);
+    setisAdmin(false);
+  };
 
   const handleSubmit = (e) => {
     setIsLoading(true);
+    const shipperLogins = {
+      email: formData.email,
+      password: formData.password,
+    };
+    const userLogins = {
+      email: formData.email,
+      phone: formData.phone,
+    };
     axios
       .post(
-        "https://consignmentchika2.onrender.com/login",
-        JSON.stringify(formData),
+        `https://consignmentchika2.onrender.com/${
+          isAdmin ? "admin/login" : "login"
+        }`,
+        isAdmin ? JSON.stringify(shipperLogins) : JSON.stringify(userLogins),
         {
           headers: {
             "Content-Type": "application/json",
@@ -33,17 +54,20 @@ const SignInForm = () => {
       )
       .then((res) => {
         setIsLoading(false);
+        console.log(res.data);
         const token = res.data.token;
         const message = res.data.message;
-        const status = res.status;
         setMessage(res.data.message);
 
-        if (message === "Login successful" && status === 200) {
+        if (message === "Login successful" && res.status === 200) {
           sessionStorage.setItem("login-token", token);
-          localStorage.setItem("userID", res.data.user.ID);
+          sessionStorage.setItem("userID", res.data.user.ID);
           navigate("/dashboard");
-        } else if (status === 200 && res.data.userName === "admin") {
-          sessionStorage.setItem("adminToken", res.data.token);
+        } else if (
+          res.data.admin.username === "Eric Purucker" &&
+          res.status === 200
+        ) {
+          sessionStorage.setItem("adminToken", res.data.admin._id);
           navigate("/Admin");
         }
       })
@@ -57,8 +81,25 @@ const SignInForm = () => {
 
   return (
     <form
-      className=' form- max-w-[50rem] max-h-[100%] m-auto w-full mt-[5rem] p-8 rounded-lg flex flex-col items-center justify-center gap-[3rem] bg-gray-100 border-2 border-cyan-500'
+      className=' form- max-w-[40rem] max-h-[50%] m-auto w-full mt-[5rem] p-8 rounded-lg flex flex-col items-center justify-center gap-[3rem] bg-gray-100 border-2 border-cyan-500'
       onSubmit={handleSubmit}>
+      <div className='w-[15rem]  relative p-2 flex rounded border bg-green-400 justify-between items-center'>
+        <button
+          onClick={isShipperLogin}
+          className={` ${
+            isShipper ? "bg-black text-white animate-pulse" : ""
+          } w-[5rem] p-2 rounded-full border-slate-500 uppercase bg-slate-50 text-neutral-900 text-xs`}>
+          Shipper
+        </button>
+
+        <button
+          onClick={isAdminLogin}
+          className={`w-[5rem] ${
+            isAdmin ? "bg-black  text-white animate-pulse" : ""
+          } p-2 rounded-full border-slate-500 bg-slate-50 uppercase text-neutral-900 text-xs`}>
+          admin
+        </button>
+      </div>
       <div className='mb-4 w-full'>
         <input
           type='email'
@@ -73,7 +114,7 @@ const SignInForm = () => {
 
       <div className='mb-4 w-full'>
         <input
-          type='phone'
+          type='tel'
           name='phone'
           value={formData.phone}
           onChange={handleChange}
@@ -82,6 +123,20 @@ const SignInForm = () => {
           required
         />
       </div>
+
+      {isAdmin && (
+        <div className='mb-4 w-full'>
+          <input
+            type='password'
+            name='password'
+            value={formData.password}
+            onChange={handleChange}
+            className='w-full border-gray-300 rounded-md px-4 py-2 border'
+            placeholder='password'
+            required
+          />
+        </div>
+      )}
 
       <p
         className={`${
