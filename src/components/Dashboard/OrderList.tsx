@@ -23,7 +23,7 @@ const OrderList: React.FC = () => {
   // on component mount fetch orders list
   useEffect(() => {
     setIsLoading(true);
-    const userID = localStorage.getItem("userID");
+    const userID = sessionStorage.getItem("userID");
 
     if (userID) {
       console.log("user found", userID);

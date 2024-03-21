@@ -59,7 +59,7 @@ const AddeachParcelForm = () => {
       const updatedeachParcels = [...eachParcelsToShip];
       updatedeachParcels[i].isLoading = true;
       seteachParcelsToShip(updatedeachParcels);
-      const userID = localStorage.getItem("userID");
+      const userID = sessionStorage.getItem("userID");
       if (userID) {
         let payload = {
           data: {
@@ -124,7 +124,6 @@ const AddeachParcelForm = () => {
       });
     }
   };
-
 
   return (
     <div className='mx-auto flex flex-col items-center  w-full m-auto'>
@@ -244,7 +243,7 @@ const AddeachParcelForm = () => {
                       : "cursor-pointer"
                   }`}>
                   {p.isShipped ? "shipped" : " not shipped"}
-                  {p.isLoading && <LoadingSpinner className="bg-" />}
+                  {p.isLoading && <LoadingSpinner className='bg-' />}
                 </button>
               </li>
             ))}
