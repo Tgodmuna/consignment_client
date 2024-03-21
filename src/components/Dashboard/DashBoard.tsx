@@ -2,10 +2,13 @@ import { useState, useEffect } from "react";
 import SideBar, { MobileSIdeBar } from "./SideBar";
 import MainPage from "./MainPage";
 import Nav from "./Nav";
-import LeftSideBar from "./LeftSideBar";
 import { Outlet, useLocation } from "react-router-dom";
 
-export const DashBoard = () => {
+type onLogin = {
+  handleLogout: () => void;
+};
+
+export const DashBoard = ({ handleLogout }: onLogin) => {
   // Step 1: Create a state to manage the visibility of the welcome message
   const [showWelcomeMessage, setShowWelcomeMessage] = useState(false);
 
@@ -34,10 +37,10 @@ export const DashBoard = () => {
 
   return (
     <div className='flex md:flex-row flex-col  items overflow-scroll overflow-x-hidden bg-gray-400 md:h-screen'>
-      <SideBar />
+      <SideBar handleLogout={handleLogout} />
       <MobileSIdeBar handler={getState} />
       <div className='flex w-[100vw] max-w-[100vw] overflow-scroll overflow-x-hidden  bg-red-400 p-3 flex-col gap-[0.5rem] md:h-screen'>
-        <Nav  />
+        <Nav />
         {isUser ? <Outlet /> : <MainPage />}
       </div>
       {/* <LeftSideBar /> */}

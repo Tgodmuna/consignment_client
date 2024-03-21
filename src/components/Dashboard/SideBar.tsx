@@ -77,6 +77,7 @@ const SideBar = (prop: any) => {
 export default SideBar;
 
 type propType = { handler: (v) => any };
+
 //mobile sidebar
 export const MobileSIdeBar = ({ handler }: propType) => {
   const [isActive, setisActive] = useState(true);
