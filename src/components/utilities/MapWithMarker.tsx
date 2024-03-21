@@ -1,52 +1,46 @@
-import React, { useEffect, useRef } from "react";
-import L from "leaflet";
+import React, { useState } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import Icon from "./Icon";
 
 interface MapWithMarkerProps {
-  coordinates:
-    | {
-        lat: number;
-        lon: number;
-      }
-    | undefined;
+  coordinates: { lat: number; lon: number } | undefined;
 }
 
 const MapWithMarker: React.FC<MapWithMarkerProps> = ({ coordinates }) => {
-  const mapRef = useRef<HTMLDivElement>(null);
-  const markerRef = useRef<L.Marker | null>(null);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  useEffect(() => {
-    if (!mapRef.current) return;
-    const mapElement = mapRef.current;
-
-    if (coordinates) {
-      const map = L.map(mapRef.current).setView(
-        [coordinates.lat, coordinates.lon],
-        13,
-      );
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      }).addTo(map);
-      // Add Marker to the map
-      markerRef.current = L.marker([coordinates.lat, coordinates.lon]).addTo(
-        map,
-      );
-      markerRef.current
-        .bindPopup("<b>This is where your goods are!</b>")
-        .openPopup();
-      markerRef.current.setIcon(Icon);
-    }
-
-    return () => {
-      if (mapElement) {
-        mapElement.remove();
-      }
-    };
-  }, [coordinates]);
-
-  return <div style={{ height: "400px" }} ref={mapRef}></div>;
+  return (
+    <div style={{ width: "100%", height: "400px" }}>
+      <MapContainer
+        dragging={false}
+        style={{ width: "100%", height: "100%" }}
+        center={coordinates ? [coordinates.lat, coordinates.lon] : [0, 0]}
+        zoom={coordinates ? 13 : 1}
+        scrollWheelZoom={true}>
+        <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
+        {coordinates && (
+          <Marker
+            eventHandlers={{
+              mouseover: () => setIsPopupOpen(true),
+              mouseout: () => setIsPopupOpen(false),
+            }}
+            title='hover or click to see parcel location'
+            position={[coordinates.lat, coordinates.lon]}
+            icon={Icon}
+            alt='current parcel location'>
+            {isPopupOpen && (
+              <Popup
+                className='capitalize text-neutral-600'
+                autoClose={true}
+                content={"current location of the parcel"}
+              />
+            )}
+          </Marker>
+        )}
+      </MapContainer>
+    </div>
+  );
 };
 
 export default MapWithMarker;
