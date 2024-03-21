@@ -55,11 +55,10 @@ const ShippingForm = () => {
       if (data.message === "New user registered successfully") {
         setSuccessMsg("Account created successfully");
         setShowNotification(true);
-
         // Automatically navigate to the sign-in page after 2 seconds
         setTimeout(() => {
           Navigate("/signIn");
-        }, 2000);
+        }, 3000);
       } else if (data.status === 409) {
         setErrMSG(data.message);
       } else {
