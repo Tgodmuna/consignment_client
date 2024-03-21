@@ -28,7 +28,11 @@ const Map = ({ parcelId, className, userId }: mapPropType) => {
   const sendCoordinnatesToSever = (lat: number, lon: number) => {
     const data = { coordinates: { lat: lat, lon: lon }, parcelId, userId };
     axios
-    .put(`https://consignmentchika2.onrender.com/updateCoordinates`, JSON.stringify(data), { headers: { "Content-Type": "application/json" } },)
+      .put(
+        `https://consignmentchika2.onrender.com/updateCoordinates`,
+        JSON.stringify(data),
+        { headers: { "Content-Type": "application/json" } },
+      )
       .then((res) => {
         console.log(res);
       })
@@ -55,7 +59,6 @@ const Map = ({ parcelId, className, userId }: mapPropType) => {
         `https://nominatim.openstreetmap.org/reverse?lat=${coordinates.lat}&lon=${coordinates.lon}&format=json`,
       )
       .then((res) => {
-        console.log(res.data);
         setLocation(res.data);
         //save to
       })
