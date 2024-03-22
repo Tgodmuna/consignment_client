@@ -81,13 +81,15 @@ const SignInForm = () => {
 
   return (
     <form
-      className=' form- max-w-[40rem] max-h-[50%] m-auto w-full mt-[5rem] p-8 rounded-lg flex flex-col items-center justify-center gap-[3rem] bg-gray-100 border-2 border-cyan-500'
+      className=' form- max-w-[30rem] max-h-[20%] m-auto w-full mt-[2rem] p-8 rounded-lg flex flex-col items-center justify-center gap-[2rem] bg-gray-100 border-2 border-cyan-500'
       onSubmit={handleSubmit}>
       <div className='w-[15rem]  relative p-2 flex rounded border bg-green-400 justify-between items-center'>
         <button
           onClick={isShipperLogin}
           className={` ${
-            isShipper ? "bg-black text-white animate-pulse" : ""
+            isShipper
+              ? "bg-black transition-all duration-500 text-white animate-pulse"
+              : ""
           } w-[5rem] p-2 rounded-full border-slate-500 uppercase bg-slate-50 text-neutral-900 text-xs`}>
           Shipper
         </button>
@@ -95,7 +97,9 @@ const SignInForm = () => {
         <button
           onClick={isAdminLogin}
           className={`w-[5rem] ${
-            isAdmin ? "bg-black  text-white animate-pulse" : ""
+            isAdmin
+              ? "bg-black  transition-all duration-500  text-white animate-pulse"
+              : ""
           } p-2 rounded-full border-slate-500 bg-slate-50 uppercase text-neutral-900 text-xs`}>
           admin
         </button>
