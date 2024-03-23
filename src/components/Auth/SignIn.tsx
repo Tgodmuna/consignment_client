@@ -38,7 +38,7 @@ const SignInForm = () => {
     };
     const userLogins = {
       email: formData.email,
-      phone: formData.phone,
+      password: formData.password,
     };
     axios
       .post(
@@ -118,12 +118,12 @@ const SignInForm = () => {
 
       <div className='mb-4 w-full'>
         <input
-          type='tel'
-          name='phone'
-          value={formData.phone}
+          type='password'
+          name='password'
+          value={formData.password}
           onChange={handleChange}
           className='w-full border-gray-300 rounded-md px-4 py-2 border'
-          placeholder='phone'
+          placeholder='password'
           required
         />
       </div>

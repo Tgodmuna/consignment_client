@@ -11,6 +11,7 @@ const ShippingForm = () => {
     address: "",
     DateOfBirth: "",
     parmanenentAddress: "",
+    password: "",
   });
 
   const Navigate = useNavigate();
@@ -20,7 +21,7 @@ const ShippingForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -151,6 +152,20 @@ const ShippingForm = () => {
           />
           <label className={`label ${formData.phoneNumber ? "hidden" : ""}`}>
             Phone Number
+          </label>
+        </div>
+
+        <div className='mb-4 inputsContainer'>
+          <input
+            type='password'
+            name='password'
+            value={formData.password}
+            onChange={handleChange}
+            className=' input peer '
+            required
+          />
+          <label className={`label ${formData.userName ? "hidden" : ""}`}>
+            password
           </label>
         </div>
 
