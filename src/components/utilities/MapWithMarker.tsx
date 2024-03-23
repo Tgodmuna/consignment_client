@@ -27,7 +27,6 @@ const MapWithMarker: React.FC<MapWithMarkerProps> = ({ coordinates }) => {
         .then((res) => {
           setLocationName(res.data.display_name);
           setisLocationNameLoading(false);
-          console.log(res.data);
         })
         .catch((err) => {
           console.log(err.message);
