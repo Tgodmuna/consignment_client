@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 const SignInForm = () => {
   const [formData, setFormData] = useState({
     email: "",
-    phone: "",
     password: "",
   });
   const [Message, setMessage] = useState("");
@@ -42,10 +41,9 @@ const SignInForm = () => {
     };
     axios
       .post(
-        `https://consignmentchika2.onrender.com/${
-          isAdmin ? "admin/login" : "login"
+        `https://consignmentchika2.onrender.com/${isAdmin ? "admin/login" : "login"
         }`,
-        isAdmin ? JSON.stringify(shipperLogins) : JSON.stringify(userLogins),
+        isAdmin ? JSON.stringify(shipperLogins)  : JSON.stringify(userLogins),
         {
           headers: {
             "Content-Type": "application/json",
@@ -54,7 +52,6 @@ const SignInForm = () => {
       )
       .then((res) => {
         setIsLoading(false);
-        console.log(res.data);
         const token = res.data.token;
         const message = res.data.message;
         setMessage(res.data.message);
@@ -81,8 +78,11 @@ const SignInForm = () => {
 
   return (
     <form
-      className=' form- max-w-[30rem] max-h-[20%] m-auto w-full mt-[2rem] p-8 rounded-lg flex flex-col items-center justify-center gap-[2rem] bg-gray-100 border-2 border-cyan-500'
+      className={`form- max-w-[30rem] max-h-[20%] m-auto w-full mt-[2rem] p-8 rounded-lg flex flex-col items-center justify-center gap-[2rem] bg-gray-100 ${
+        isAdmin && "bg-gray-900 text-white"
+      } border-2 border-cyan-500`}
       onSubmit={handleSubmit}>
+      {/* switch */}
       <div className='w-[15rem]  relative p-2 flex rounded border bg-green-400 justify-between items-center'>
         <button
           onClick={isShipperLogin}
@@ -118,18 +118,16 @@ const SignInForm = () => {
 
       <div className='mb-4 w-full'>
         <input
-          type='password'
-          name='password'
-          value={formData.password}
-          onChange={handleChange}
+          type='tel'
+          name='phone'
           className='w-full border-gray-300 rounded-md px-4 py-2 border'
-          placeholder='password'
+          placeholder='phone'
           required
         />
       </div>
 
       {isAdmin && (
-        <div className='mb-4 w-full'>
+        <div className='mb-4 w-full text-black'>
           <input
             type='password'
             name='password'
