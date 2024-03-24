@@ -157,7 +157,7 @@ const AddeachParcelForm = () => {
           className='block w-full border border-gray-300 rounded-md py-2 px-3 mb-3'
           required
         />
-        <input
+        {/* <input
           type='text'
           name='weight'
           value={eachParcel.weight}
@@ -165,7 +165,7 @@ const AddeachParcelForm = () => {
           placeholder='Weight (kg)'
           className='block w-full border border-gray-300 rounded-md py-2 px-3 mb-3'
           required
-        />
+        /> */}
         <input
           type='text'
           name='destination'
@@ -176,24 +176,23 @@ const AddeachParcelForm = () => {
           required
         />
         <button
-          onClick={() => {
-            if (
-              eachParcel.destination &&
-              eachParcel.recipient &&
-              eachParcel.weight
-            ) {
-              // Generate price for the eachParcel based on weight
-              const newprice = parseFloat(eachParcel.weight) * 5; // Assuming price is $5 per kg
-              const neweachParcel: eachParcel = {
-                ...eachParcel,
-                price: newprice,
-              };
-              seteachParcelsToShip((prevParcels) => [
-                ...prevParcels,
-                neweachParcel,
-              ]);
-            }
-          }}
+          // onClick={() => {
+          //   if (
+          //     eachParcel.destination &&
+          //     eachParcel.recipient
+          //   ) {
+          //     // Generate price for the eachParcel based on weight
+          //     const newprice = parseFloat(eachParcel.weight) * 30;
+          //     const neweachParcel: eachParcel = {
+          //       ...eachParcel,
+          //       price: newprice,
+          //     };
+          //     seteachParcelsToShip((prevParcels) => [
+          //       ...prevParcels,
+          //       neweachParcel,
+          //     ]);
+          //   }
+          // }}
           type='button'
           className='bg-blue-500 text-xs w-full text-center text-white py-2 px-4 rounded-md hover:bg-blue-600 flex items-center gap-1'>
           Add eachParcel
@@ -218,16 +217,10 @@ const AddeachParcelForm = () => {
                   <span className='font-bold text-sm'>Recipient:</span>{" "}
                   {p.recipient}
                 </p>{" "}
-                <p className='text-xs capitalize'>
-                  <span className='font-bold text-sm'>Weight:</span> {p.weight}
-                </p>{" "}
+                <p className='text-xs capitalize'></p>{" "}
                 <p className='text-xs capitalize'>
                   <span className='font-bold text-sm'>Destination:</span>{" "}
                   {p.destination}
-                </p>{" "}
-                <p className='text-xs capitalize'>
-                  <span className='font-bold text-sm'>Price:</span> $
-                  {p.price.toFixed(2)}{" "}
                 </p>{" "}
                 <button
                   ref={BTNref}

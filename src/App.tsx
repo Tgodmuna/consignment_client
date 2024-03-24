@@ -81,10 +81,6 @@ function App() {
       setIsLoggedIn(true);
     }
 
-    // if (!Usertoken) {
-    //   seterrLoginMsg("not authenticated to view this page");
-    //   navigate("/signIn");
-    // }
 
     if (AdmiUserToken) {
       setisAdmin(true);
