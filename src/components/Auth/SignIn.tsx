@@ -35,15 +35,20 @@ const SignInForm = () => {
       email: formData.email,
       password: formData.password,
     };
-    const userLogins = {
+    const adminLogins = {
       email: formData.email,
       password: formData.password,
     };
+
+    if (isAdmin) console.log("admin details", adminLogins);
+    if (isShipper) console.log("user details", shipperLogins);
+
     axios
       .post(
-        `https://consignmentchika2.onrender.com/${isAdmin ? "admin/login" : "login"
+        `https://consignmentchika2.onrender.com/${
+          isAdmin ? "admin/login" : "login"
         }`,
-        isAdmin ? JSON.stringify(shipperLogins)  : JSON.stringify(userLogins),
+        isAdmin ? JSON.stringify(adminLogins) : JSON.stringify(shipperLogins),
         {
           headers: {
             "Content-Type": "application/json",
@@ -123,18 +128,17 @@ const SignInForm = () => {
           className='w-full border-gray-300 rounded-md px-4 py-2 border'
           placeholder='password'
           required
+          onChange={handleChange}
         />
       </div>
 
       {isAdmin && (
         <div className='mb-4 w-full text-black'>
           <input
-            type='password'
-            name='password'
-            value={formData.password}
-            onChange={handleChange}
+            type='text'
+            name='username'
             className='w-full border-gray-300 rounded-md px-4 py-2 border'
-            placeholder='password'
+            placeholder='username'
             required
           />
         </div>

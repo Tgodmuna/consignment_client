@@ -26,7 +26,7 @@ const InvoiceCard = ({
         </p>
         <ul className=' text-xs capitalize flex flex-col items-center gap-3 justify-center'>
           <li>Estimated delivery time: 3-5 business days</li>
-          <li>Price: ${price.toFixed(2)}</li>
+          {/* <li>Price: ${price.toFixed(2)}</li> */}
           <li>Tracking ID: {trackingId}</li>
           <li>weight: {weight}</li>{" "}
         </ul>
