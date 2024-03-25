@@ -51,12 +51,16 @@ const OrderList: React.FC = () => {
 
   return (
     <div className=' overflow-scroll h-[40rem] flex-wrap m-auto items-center justify-center bg-slate-50 w-full'>
-      {IsLoading && (
-        <LoadingSpinner className='h-[5rem] w-[10rem]  m-auto' />
-      )}
+      {IsLoading && <LoadingSpinner className='h-[5rem] w-[10rem]  m-auto' />}
       <h2 className='text-2xl capitalize font-bold mb-4 text-center'>
         list of orders made ({OrderList.length})
       </h2>
+
+      <p className='text-xs text-red-600 animate-bounce capitalize text-center '>
+        {" "}
+        when your goods starts shipping, you will see it displayed on the map{" "}
+        <br /> with its current location
+      </p>
       {ErrorMesage ? (
         <h1 className='text-red-500 text-2xl text-center '>{ErrorMesage}</h1>
       ) : (
