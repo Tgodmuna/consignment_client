@@ -31,9 +31,11 @@ const InvoiceCard = ({
           <li>weight: {weight}</li>{" "}
         </ul>
         <p className='font-light text-xs text-rose-600 capitalize'>
-          Note that all your shipping details are sent to your registered Email
+          {/* Note that all your shipping details are sent to your registered Email
           address and do not share your tracking details with any body to avoid
-          otherwise
+          otherwise */}
+          Note..! that for security reasons you will need to copy down the
+          tracking number for future use, <br /> thanks.
         </p>
         <button
           type='button'

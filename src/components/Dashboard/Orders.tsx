@@ -157,7 +157,7 @@ const AddeachParcelForm = () => {
           className='block w-full border border-gray-300 rounded-md py-2 px-3 mb-3'
           required
         />
-        <input
+        {/* <input
           type='text'
           name='weight'
           value={eachParcel.weight}
@@ -165,7 +165,7 @@ const AddeachParcelForm = () => {
           placeholder='Weight (kg)'
           className='block w-full border border-gray-300 rounded-md py-2 px-3 mb-3'
           required
-        />
+        /> */}
         <input
           type='text'
           name='destination'
@@ -179,14 +179,14 @@ const AddeachParcelForm = () => {
           onClick={() => {
             if (
               eachParcel.destination &&
-              eachParcel.recipient &&
-              eachParcel.weight
+              eachParcel.recipient
+              // eachParcel.weight
             ) {
               // Generate price for the eachParcel based on weight
-              const newprice = parseFloat(eachParcel.weight) * 5; // Assuming price is $5 per kg
+              // const newprice = parseFloat(eachParcel.weight) * 5; // Assuming price is $5 per kg
               const neweachParcel: eachParcel = {
                 ...eachParcel,
-                price: newprice,
+                // price: newprice
               };
               seteachParcelsToShip((prevParcels) => [
                 ...prevParcels,
@@ -225,10 +225,10 @@ const AddeachParcelForm = () => {
                   <span className='font-bold text-sm'>Destination:</span>{" "}
                   {p.destination}
                 </p>{" "}
-                <p className='text-xs capitalize'>
+                {/* <p className='text-xs capitalize'>
                   <span className='font-bold text-sm'>Price:</span> $
                   {p.price.toFixed(2)}{" "}
-                </p>{" "}
+                </p>{" "} */}
                 <button
                   ref={BTNref}
                   title='Click to start shipping'
