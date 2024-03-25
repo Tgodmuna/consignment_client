@@ -218,9 +218,9 @@ const AddeachParcelForm = () => {
                   <span className='font-bold text-sm'>Recipient:</span>{" "}
                   {p.recipient}
                 </p>{" "}
-                <p className='text-xs capitalize'>
+                {/* <p className='text-xs capitalize'>
                   <span className='font-bold text-sm'>Weight:</span> {p.weight}
-                </p>{" "}
+                </p>{" "} */}
                 <p className='text-xs capitalize'>
                   <span className='font-bold text-sm'>Destination:</span>{" "}
                   {p.destination}
