@@ -51,7 +51,7 @@ const OrderList: React.FC = () => {
 
   return (
     <div className=' overflow-scroll h-[40rem] flex-wrap m-auto items-center justify-center bg-slate-50 w-full'>
-      {IsLoading && <LoadingSpinner className='h-[5rem] w-[10rem]  m-auto' />}
+      {IsLoading && <LoadingSpinner className='h-[5rem] w-[10rem]  m-auto  my-3' />}
       <h2 className='text-2xl capitalize font-bold mb-4 text-center'>
         list of orders made ({OrderList.length})
       </h2>
