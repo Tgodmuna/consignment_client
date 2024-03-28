@@ -39,7 +39,7 @@ export const DashBoard = ({ handleLogout }: onLogin) => {
     <div className='flex md:flex-row flex-col  items overflow-scroll overflow-x-hidden bg-gray-400 md:h-screen'>
       <SideBar handleLogout={handleLogout} />
       <MobileSIdeBar handler={getState} />
-      <div className='flex w-[100vw] max-w-[100vw] overflow-scroll overflow-x-hidden  bg-red-400 p-3 flex-col gap-[0.5rem] md:h-screen'>
+      <div className='flex w-[100vw] max-w-[100vw] overflow-scroll overflow-x-hidden  bg-slate-400 p-3 flex-col gap-[0.5rem] md:h-screen'>
         <Nav />
         {isUser ? <Outlet /> : <MainPage />}
       </div>
