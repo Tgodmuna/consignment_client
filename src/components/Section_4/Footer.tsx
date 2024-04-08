@@ -18,12 +18,10 @@ const Footer = () => {
                 info@trustGold.com
               </li>
               <li>
-                <span className='text-sm font-bold'>phone:</span> +1 (123)
-                456-7890
+                <span className='text-sm font-bold'>phone:</span> +447309652806
               </li>
               <li>
-                <span className='text-sm font-bold'>address:</span> Downing
-                Street, London, the UK
+                <span className='text-sm font-bold'>address:</span> USA
               </li>
               <li>ISO 9001: 2015, ISO 27001: 2013 Certified Company</li>
               <li> CIN: L63090DL2011PLC221234</li>
