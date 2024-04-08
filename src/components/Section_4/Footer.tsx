@@ -15,14 +15,15 @@ const Footer = () => {
               <li>
                 {" "}
                 <span className='text-sm font-bold'>Email:</span>{" "}
-                info@trustGold.com
+                trustGuaranteegt@outlook.com
               </li>
               <li>
                 <span className='text-sm font-bold'>phone:</span> +447309652806
               </li>
               <li>
-                <span className='text-sm font-bold'>address:</span> USA
-              </li>
+-                <span className='text-sm font-bold'>address:</span> Downing
+-                Street, London, the UK
+               </li>
               <li>ISO 9001: 2015, ISO 27001: 2013 Certified Company</li>
               <li> CIN: L63090DL2011PLC221234</li>
             </ul>
