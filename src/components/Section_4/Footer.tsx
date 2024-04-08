@@ -15,7 +15,7 @@ const Footer = () => {
               <li>
                 {" "}
                 <span className='text-sm font-bold'>Email:</span>{" "}
-                info@trustGold.site
+                info@trustGold.com
               </li>
               <li>
                 <span className='text-sm font-bold'>phone:</span> +447309652806
